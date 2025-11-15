@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import NewCardGrid from "@/app/components/news-grid";
+import AnimateOnScroll from "@/app/components/animate-on-scroll";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { adaptNoticiaToCard } from "@/lib/adapters";
@@ -77,13 +78,15 @@ export default function News() {
     <main className="min-h-screen bg-gray-50">
       <section className="py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-10">
-            Noticias y Actualizaciones
-          </h2>
+          <AnimateOnScroll animation="fadeInUp">
+            <h2 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-10">
+              Noticias y Actualizaciones
+            </h2>
+          </AnimateOnScroll>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Columna izquierda: Grid de noticias */}
-            <div className="lg:col-span-2">
+            <AnimateOnScroll animation="fadeInRight" threshold={0.2} className="lg:col-span-2">
               {isLoading ? (
                 <p className="text-gray-500">Cargando noticias...</p>
               ) : noticias.length === 0 ? (
@@ -91,10 +94,11 @@ export default function News() {
               ) : (
                 <NewCardGrid news={noticias} columns={2} />
               )}
-            </div>
+            </AnimateOnScroll>
 
             {/* Columna derecha: Sidebar */}
-            <aside className="space-y-8">
+            <AnimateOnScroll animation="fadeInLeft" threshold={0.2}>
+              <aside className="space-y-8">
               {/* Buscador */}
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
                 <h3 className="text-[var(--color-primary)] font-semibold mb-3">
@@ -173,7 +177,8 @@ export default function News() {
                   ))}
                 </ul>
               </div>
-            </aside>
+              </aside>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>

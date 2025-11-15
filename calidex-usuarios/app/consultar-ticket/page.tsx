@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { api, TicketConsulta } from '@/lib/api';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimateOnScroll from '@/app/components/animate-on-scroll';
 
 const ticketSchema = z.object({
   codigo_ticket: z
@@ -70,17 +71,20 @@ export default function ConsultarTicket() {
     <main className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4">
-            Consultar Ticket
-          </h1>
-          <p className="text-[var(--color-text-grey)]">
-            Ingresa el código de tu ticket para verificar su estado
-          </p>
-        </div>
+        <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
+          <div className="text-center mb-10">
+            <h1 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4">
+              Consultar Ticket
+            </h1>
+            <p className="text-[var(--color-text-grey)]">
+              Ingresa el código de tu ticket para verificar su estado
+            </p>
+          </div>
+        </AnimateOnScroll>
 
         {/* Formulario */}
-        <div className="bg-white rounded-2xl shadow-md p-6 lg:p-8 mb-8">
+        <AnimateOnScroll animation="fadeInUp" delay="delay-1s" threshold={0.2}>
+          <div className="bg-white rounded-2xl shadow-md p-6 lg:p-8 mb-8">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -110,11 +114,13 @@ export default function ConsultarTicket() {
               {isLoading ? 'Consultando...' : 'Consultar Ticket'}
             </button>
           </form>
-        </div>
+          </div>
+        </AnimateOnScroll>
 
         {/* Resultado */}
         {resultado && (
-          <div className="bg-white rounded-2xl shadow-md p-6 lg:p-8">
+          <AnimateOnScroll animation="fadeInUp" threshold={0.2} triggerOnce={false}>
+            <div className="bg-white rounded-2xl shadow-md p-6 lg:p-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900">
                 Resultado de Consulta
@@ -211,7 +217,8 @@ export default function ConsultarTicket() {
                 </div>
               )}
             </div>
-          </div>
+            </div>
+          </AnimateOnScroll>
         )}
       </div>
     </main>

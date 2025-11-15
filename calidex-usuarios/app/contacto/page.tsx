@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { api } from '@/lib/api';
 import Image from 'next/image';
+import AnimateOnScroll from '@/app/components/animate-on-scroll';
 
 const contactSchema = z.object({
   nombre: z.string().min(1, 'Nombre es requerido'),
@@ -47,32 +48,37 @@ export default function Contact() {
     <main className="min-h-screen bg-gray-50">
       <section className="py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
-              Contacto
-            </h1>
-            <p className="text-[var(--color-text-grey)]">
-              Estamos aquí para ayudarte. Ponte en contacto con nosotros a
-              través del formulario o nuestra información de contacto directa
-            </p>
-          </div>
+          <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
+                Contacto
+              </h1>
+              <p className="text-[var(--color-text-grey)]">
+                Estamos aquí para ayudarte. Ponte en contacto con nosotros a
+                través del formulario o nuestra información de contacto directa
+              </p>
+            </div>
+          </AnimateOnScroll>
 
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 max-w-6xl mx-auto">
-            <div className="flex-1 flex justify-center drop-shadow-lg">
-              <Image
-                src="/contactoImg.webp"
-                alt="Contacto CalidexA"
-                width={400}
-                height={400}
-                className="rounded-2xl shadow-md object-cover"
-              />
-            </div>
+            <AnimateOnScroll animation="fadeInLeft" threshold={0.2} className="flex-1 flex justify-center">
+              <div className="drop-shadow-lg">
+                <Image
+                  src="/contactoImg.webp"
+                  alt="Contacto CalidexA"
+                  width={400}
+                  height={400}
+                  className="rounded-2xl shadow-md object-cover"
+                />
+              </div>
+            </AnimateOnScroll>
 
             {/* Formulario */}
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex-1 w-full max-w-md bg-gray-50 p-6 rounded-2xl shadow-sm"
-            >
+            <AnimateOnScroll animation="fadeInRight" threshold={0.2} className="flex-1 w-full max-w-md">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full bg-gray-50 p-6 rounded-2xl shadow-sm"
+              >
               <h3 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-6">
                 Envíanos un mensaje
               </h3>
@@ -147,7 +153,8 @@ export default function Contact() {
               >
                 {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
               </button>
-            </form>
+              </form>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>

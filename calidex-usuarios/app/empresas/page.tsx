@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import CompanyGrid from "@/app/components/company-grid";
+import AnimateOnScroll from "@/app/components/animate-on-scroll";
 import { api } from "@/lib/api";
 import { adaptEmpresaToCard } from "@/lib/adapters";
 
@@ -14,11 +15,16 @@ export default function Companies() {
     const fetchEmpresas = async () => {
       setIsLoading(true);
       try {
-        const data = await api.getEmpresas(search || undefined);
-        const adaptadas = data.map(adaptEmpresaToCard);
+        const response = await api.getEmpresas(search || undefined);
+        // Manejar tanto array directo como respuesta paginada
+        const empresasArray = Array.isArray(response) 
+          ? response 
+          : (response as any)?.data || [];
+        const adaptadas = empresasArray.map(adaptEmpresaToCard);
         setEmpresas(adaptadas);
       } catch (error) {
         console.error("Error al cargar empresas:", error);
+        setEmpresas([]);
       } finally {
         setIsLoading(false);
       }
@@ -36,14 +42,18 @@ export default function Companies() {
     <main className="min-h-screen bg-gray-50">
       <section className="py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
-              Empresas acreditadas por CalidexA
-            </h1>
-            <p className="text-[var(--color-text-grey)]">
-              Encuentre empresas confiables y certificadas que cumplen con
-              nuestros rigurosos estándares de calidad.
-            </p>
+          <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
+                Empresas acreditadas por CalidexA
+              </h1>
+              <p className="text-[var(--color-text-grey)]">
+                Encuentre empresas confiables y certificadas que cumplen con
+                nuestros rigurosos estándares de calidad.
+              </p>
+            </div>
+          </AnimateOnScroll>
+          <AnimateOnScroll animation="fadeInUp" delay="delay-1s" threshold={0.2}>
             {/* Búsqueda */}
             <div className="mt-10">
               <div className="relative w-full sm:w-64 mx-auto">
@@ -104,8 +114,8 @@ export default function Companies() {
                 <CompanyGrid companies={empresas} columns={3} />
               )}
             </div>
+          </AnimateOnScroll>
           </div>
-        </div>
       </section>
     </main>
   );

@@ -89,7 +89,7 @@ export const api = {
 
   // --- Empresas ---
   getEmpresas: (buscar?: string) =>
-    apiFetch<Empresa[]>(`/public/empresas${buscar ? `?buscar=${encodeURIComponent(buscar)}` : ''}`),
+    apiFetch<Empresa[] | PaginatedResponse<Empresa>>(`/public/empresas${buscar ? `?buscar=${encodeURIComponent(buscar)}` : ''}`),
 
   getEmpresaPorSlug: (slug: string) =>
     apiFetch<Empresa>(`/public/empresas/${slug}`),
