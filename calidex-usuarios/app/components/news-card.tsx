@@ -19,7 +19,7 @@ export default function NewCard({
   slug,
 }: NewCardProps) {
   return (
-    <div className="bg-white border-2 border-[var(--color-primary)] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+    <div className="bg-white border-1 border-[var(--color-primary)] rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
       {/* Imagen */}
       <div className="w-full h-[200px] relative">
         <Image
@@ -27,6 +27,7 @@ export default function NewCard({
           alt={title}
           fill
           className="object-cover"
+          unoptimized={image.startsWith('http://localhost') || image.startsWith('https://')}
           sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
@@ -44,7 +45,7 @@ export default function NewCard({
         </p>
 
         <Link
-          href={`/pages/news/${slug}`}
+          href={`/noticias/${slug}`}
           className="text-[var(--color-secondary)] text-sm underline font-medium hover:opacity-80 transition self-start"
         >
           Leer más

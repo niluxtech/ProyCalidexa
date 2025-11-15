@@ -1,10 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    domains: ["picsum.photos", "yourdomain.com"], // <-- agrega tus dominios permitidos aquí
     remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/storage/**",
+      },
+      {
+        protocol: "https",
+        hostname: "api.calidexa.pe",
+        pathname: "/storage/**",
+      },
       {
         protocol: "https",
         hostname: "picsum.photos",
@@ -14,6 +23,26 @@ const nextConfig: NextConfig = {
         hostname: "api.qrserver.com",
       },
     ],
+  },
+  // Redirecciones de rutas antiguas (si las había)
+  async redirects() {
+    return [
+      {
+        source: "/pages/news/:slug*",
+        destination: "/noticias/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/pages/companies/:slug*",
+        destination: "/empresas/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/pages/contact",
+        destination: "/contacto",
+        permanent: true,
+      },
+    ];
   },
 };
 

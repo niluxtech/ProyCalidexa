@@ -26,6 +26,7 @@ export default function CompanyCard({
           width={60}
           height={60}
           className="rounded-full object-cover border border-gray-200"
+          unoptimized={logo.startsWith('http://localhost') || logo.startsWith('https://')}
         />
         <h3 className="text-lg font-semibold text-[var(--color-primary)] text-left line-clamp-2">
           {name}
@@ -39,7 +40,7 @@ export default function CompanyCard({
 
       {/* Botón */}
       <Link
-        href={`/pages/companies/${slug}`}
+        href={`/empresas/${slug}`}
         className="inline-block text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-6 py-2 rounded-full transition-colors"
       >
         Ver detalles

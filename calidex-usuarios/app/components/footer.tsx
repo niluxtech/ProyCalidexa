@@ -64,7 +64,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link 
-                  href="/news" 
+                  href="/noticias" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Noticias
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/companies" 
+                  href="/empresas" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Empresas
@@ -80,7 +80,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/contact" 
+                  href="/consultar-ticket" 
+                  className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
+                >
+                  Consultar Ticket
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/contacto" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Contacto

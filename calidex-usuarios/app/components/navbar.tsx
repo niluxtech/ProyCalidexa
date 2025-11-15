@@ -32,9 +32,9 @@ export default function Navbar() {
           <ul className="hidden md:flex gap-6 lg:gap-8 list-none m-0">
             <li>
               <Link
-                href="/pages/news"
+                href="/noticias"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
-                  isActive("/news") ? "text-[var(--color-secondary)]" : ""
+                  isActive("/noticias") ? "text-[var(--color-secondary)]" : ""
                 }`}
               >
                 Noticias
@@ -42,9 +42,9 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/pages/companies"
+                href="/empresas"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
-                  isActive("/companies") ? "text-[var(--color-secondary)]" : ""
+                  isActive("/empresas") ? "text-[var(--color-secondary)]" : ""
                 }`}
               >
                 Empresas
@@ -52,9 +52,19 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/pages/contact"
+                href="/consultar-ticket"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
-                  isActive("/contact") ? "text-[var(--color-secondary)]" : ""
+                  isActive("/consultar-ticket") ? "text-[var(--color-secondary)]" : ""
+                }`}
+              >
+                Consultar Ticket
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contacto"
+                className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
+                  isActive("/contacto") ? "text-[var(--color-secondary)]" : ""
                 }`}
               >
                 Contacto
@@ -99,7 +109,7 @@ export default function Navbar() {
             <ul className="flex flex-col gap-4 pt-4">
               <li>
                 <Link
-                  href="/pages/news"
+                  href="/noticias"
                   className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -108,7 +118,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="/pages/companies"
+                  href="/empresas"
                   className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -117,7 +127,16 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="/pages/contact"
+                  href="/consultar-ticket"
+                  className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Consultar Ticket
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contacto"
                   className="block text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >

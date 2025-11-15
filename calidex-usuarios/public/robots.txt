@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Bloquear dashboard admin (por si acaso)
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Sitemap
+Sitemap: https://calidexa.pe/sitemap.xml
