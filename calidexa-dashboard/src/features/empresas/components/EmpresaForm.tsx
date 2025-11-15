@@ -101,7 +101,7 @@ export const EmpresaForm = ({ empresa, onSubmit, onCancel, isLoading }: EmpresaF
           accept="image/jpeg,image/png,image/jpg"
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
         />
-        <p className="mt-1 text-xs text-gray-500">JPG, PNG (máx. 2MB)</p>
+        <p className="mt-1 text-xs text-gray-500">JPG, PNG (máx. 5MB)</p>
       </div>
 
       {/* Buttons */}

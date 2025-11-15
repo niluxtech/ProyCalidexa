@@ -18,7 +18,7 @@ class StoreEmpresaRequest extends FormRequest
             'ruc' => 'required|string|size:11',
             'nivel' => 'required|in:Sello,Certificado',
             'estado' => 'required|in:Activo,Inactivo',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'descripcion' => 'nullable|string|max:1000',
         ];
     }
@@ -33,7 +33,8 @@ class StoreEmpresaRequest extends FormRequest
             'nivel.in' => 'El nivel debe ser Sello o Certificado',
             'estado.in' => 'El estado debe ser Activo o Inactivo',
             'logo.image' => 'El archivo debe ser una imagen',
-            'logo.max' => 'La imagen no puede superar los 2MB',
+            'logo.mimes' => 'El logo debe ser un archivo de tipo: jpeg, png, jpg',
+            'logo.max' => 'El logo no puede superar los 5MB',
         ];
     }
 }
