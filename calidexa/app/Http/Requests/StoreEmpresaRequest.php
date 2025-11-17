@@ -20,6 +20,9 @@ class StoreEmpresaRequest extends FormRequest
             'estado' => 'required|in:Activo,Inactivo',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'descripcion' => 'nullable|string|max:1000',
+            'latitud' => 'nullable|numeric|between:-90,90',
+            'longitud' => 'nullable|numeric|between:-180,180',
+            'direccion' => 'nullable|string|max:500',
         ];
     }
 

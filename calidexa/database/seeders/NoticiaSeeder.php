@@ -13,7 +13,7 @@ class NoticiaSeeder extends Seeder
             [
                 'titulo' => 'CalidexA certifica 50 nuevas empresas en 2024',
                 'categoria' => 'Certificaciones',
-                'contenido' => '<p>Este año hemos alcanzado un hito importante al certificar 50 nuevas empresas comprometidas con la calidad y excelencia en sus servicios.</p><p>Las empresas certificadas han demostrado cumplir con los más altos estándares de calidad.</p>',
+                'contenido' => '<p>Este año hemos alcanzado un hito importante al certificar 50 nuevas empresas comprometidas con la calidad y excelencia en sus servicios.</p><p>Las empresas acreditadas han demostrado cumplir con los más altos estándares de calidad.</p>',
                 'publicado_at' => now()->subDays(5),
             ],
             [

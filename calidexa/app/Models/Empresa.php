@@ -18,7 +18,10 @@ class Empresa extends Model
         'nivel',
         'estado',
         'logo_url',
-        'descripcion'
+        'descripcion',
+        'latitud',
+        'longitud',
+        'direccion'
     ];
 
     protected $casts = [
