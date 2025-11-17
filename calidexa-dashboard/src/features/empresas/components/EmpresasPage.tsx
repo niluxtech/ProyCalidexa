@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Building2, Plus, Search } from 'lucide-react';
+import { Building2, Plus, Search, Newspaper } from 'lucide-react';
 import { useEmpresas } from '../hooks/useEmpresas';
 import { useCreateEmpresa, useUpdateEmpresa, useDeleteEmpresa } from '../hooks/useEmpresaForm';
+import { useCreateNoticia } from '../../noticias/hooks/useNoticias';
 import { EmpresaCard } from './EmpresaCard';
 import { EmpresaForm } from './EmpresaForm';
+import { NoticiaForm } from '../../noticias/components/NoticiaForm';
 import { Loading } from '../../../components/common';
 import { Button, Modal } from '../../../components/ui';
 import type { Empresa } from '../../../types';
@@ -14,11 +16,14 @@ export const EmpresasPage = () => {
   const createMutation = useCreateEmpresa();
   const updateMutation = useUpdateEmpresa();
   const deleteMutation = useDeleteEmpresa();
+  const createNoticiaMutation = useCreateNoticia();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState<Empresa | undefined>();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [empresaToDelete, setEmpresaToDelete] = useState<Empresa | undefined>();
+  const [isNoticiaModalOpen, setIsNoticiaModalOpen] = useState(false);
+  const [empresaParaNoticia, setEmpresaParaNoticia] = useState<Empresa | undefined>();
 
   const handleCreate = () => {
     setSelectedEmpresa(undefined);
@@ -68,11 +73,57 @@ export const EmpresasPage = () => {
       );
     } else {
       createMutation.mutate(formData, {
-        onSuccess: () => {
+        onSuccess: (response) => {
           setIsModalOpen(false);
+          // Mostrar opción para crear noticia sobre la nueva empresa
+          if (response?.data) {
+            setEmpresaParaNoticia(response.data);
+            setIsNoticiaModalOpen(true);
+          }
         },
       });
     }
+  };
+
+  // Generar contenido sugerido para la noticia
+  const generateNoticiaContent = (empresa: Empresa) => {
+    const titulo = `${empresa.nombre} se une a CalidexA`;
+    
+    const contenido = `
+      <p>Nos complace anunciar que <strong>${empresa.nombre}</strong> se ha unido a la red de empresas acreditadas por CalidexA.</p>
+      
+      <p>Esta empresa ha obtenido el <strong>${empresa.nivel}</strong> de acreditación, lo que demuestra su compromiso con la calidad y la excelencia en sus servicios.</p>
+      
+      ${empresa.descripcion ? `<p>${empresa.descripcion}</p>` : ''}
+      
+      <p>CalidexA felicita a <strong>${empresa.nombre}</strong> por este logro y espera continuar trabajando juntos para mantener los más altos estándares de calidad.</p>
+      
+      <p>Para más información sobre esta empresa certificada, puedes visitar su perfil en nuestro sitio web.</p>
+    `;
+
+    return { titulo, contenido };
+  };
+
+  const handleNoticiaSubmit = (noticiaData: any) => {
+    const formData: any = { ...noticiaData };
+    
+    if (noticiaData.imagen && noticiaData.imagen[0]) {
+      formData.imagen = noticiaData.imagen[0];
+    } else {
+      delete formData.imagen;
+    }
+
+    createNoticiaMutation.mutate(formData, {
+      onSuccess: () => {
+        setIsNoticiaModalOpen(false);
+        setEmpresaParaNoticia(undefined);
+      },
+    });
+  };
+
+  const handleSkipNoticia = () => {
+    setIsNoticiaModalOpen(false);
+    setEmpresaParaNoticia(undefined);
   };
 
   if (isLoading) {
@@ -86,7 +137,7 @@ export const EmpresasPage = () => {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Empresas</h1>
           <p className="text-sm text-gray-600 mt-1">
-            Gestiona las empresas certificadas
+            Gestiona las empresas
           </p>
         </div>
         <Button variant="primary" onClick={handleCreate}>
@@ -189,6 +240,46 @@ export const EmpresasPage = () => {
           </div>
         </div>
       </Modal>
+
+      {/* Create Noticia Modal - Aparece después de crear una empresa */}
+      {empresaParaNoticia && (
+        <Modal
+          isOpen={isNoticiaModalOpen}
+          onClose={handleSkipNoticia}
+          title="Crear Noticia de Acreditación"
+          size="lg"
+        >
+          <div className="space-y-4">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <div className="flex items-start gap-3">
+                <Newspaper className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-blue-900 mb-1">
+                    ¿Deseas crear una noticia sobre la acreditación?
+                  </h4>
+                  <p className="text-sm text-blue-700">
+                    Puedes crear una noticia anunciando que <strong>{empresaParaNoticia.nombre}</strong> se ha unido a CalidexA. 
+                    El formulario está prellenado con información sugerida que puedes editar.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <NoticiaForm
+              noticia={undefined}
+              onSubmit={handleNoticiaSubmit}
+              onCancel={handleSkipNoticia}
+              isLoading={createNoticiaMutation.isPending}
+              defaultValues={{
+                titulo: generateNoticiaContent(empresaParaNoticia).titulo,
+                contenido: generateNoticiaContent(empresaParaNoticia).contenido,
+                categoria: 'General',
+                publicado_at: new Date().toISOString().slice(0, 16),
+              }}
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

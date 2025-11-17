@@ -9,6 +9,9 @@ export interface CreateEmpresaData {
   estado: 'Activo' | 'Inactivo';
   logo?: File;
   descripcion?: string;
+  latitud?: number | null;
+  longitud?: number | null;
+  direccion?: string | null;
 }
 
 export interface UpdateEmpresaData extends Partial<CreateEmpresaData> {
@@ -37,7 +40,14 @@ export const empresasService = {
     
     Object.entries(empresaData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        formData.append(key, value);
+        // FormData solo acepta strings o blobs
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else if (typeof value === 'number') {
+          formData.append(key, value.toString());
+        } else {
+          formData.append(key, value);
+        }
       }
     });
 
@@ -62,7 +72,14 @@ export const empresasService = {
     
     Object.entries(empresaData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        formData.append(key, value);
+        // FormData solo acepta strings o blobs
+        if (value instanceof File) {
+          formData.append(key, value);
+        } else if (typeof value === 'number') {
+          formData.append(key, value.toString());
+        } else {
+          formData.append(key, value);
+        }
       }
     });
 

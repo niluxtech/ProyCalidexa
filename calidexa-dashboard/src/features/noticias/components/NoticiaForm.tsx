@@ -21,9 +21,10 @@ interface NoticiaFormProps {
   onSubmit: (data: NoticiaFormData) => void;
   onCancel: () => void;
   isLoading?: boolean;
+  defaultValues?: Partial<NoticiaFormData>;
 }
 
-export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading }: NoticiaFormProps) => {
+export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading, defaultValues }: NoticiaFormProps) => {
   const { data: categorias } = useCategorias();
 
   const {
@@ -32,7 +33,7 @@ export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading }: NoticiaF
     formState: { errors },
   } = useForm<NoticiaFormData>({
     resolver: zodResolver(noticiaSchema),
-    defaultValues: noticia
+    defaultValues: defaultValues || (noticia
       ? {
           titulo: noticia.titulo,
           categoria: noticia.categoria,
@@ -45,7 +46,7 @@ export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading }: NoticiaF
       : {
           categoria: 'General',
           publicado_at: new Date().toISOString().slice(0, 16),
-        },
+        }),
   });
 
   const categoriasOptions =

@@ -1,7 +1,7 @@
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Input, Select, Textarea, Button } from '../../../components/ui';
+import { Input, Select, Textarea, Button, GoogleMapPicker } from '../../../components/ui';
 import type { Empresa } from '../../../types';
 
 
@@ -12,6 +12,9 @@ const empresaSchema = z.object({
   estado: z.enum(['Activo', 'Inactivo']),
   descripcion: z.string().optional(),
   logo: z.any().optional(),
+  latitud: z.number().nullable().optional(),
+  longitud: z.number().nullable().optional(),
+  direccion: z.string().nullable().optional(),
 });
 
 type EmpresaFormData = z.infer<typeof empresaSchema>;
@@ -27,21 +30,29 @@ export const EmpresaForm = ({ empresa, onSubmit, onCancel, isLoading }: EmpresaF
   const {
     register,
     handleSubmit,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<EmpresaFormData>({
     resolver: zodResolver(empresaSchema),
     defaultValues: empresa
-      ? {
-          nombre: empresa.nombre,
-          ruc: empresa.ruc,
-          nivel: empresa.nivel,
-          estado: empresa.estado,
-          descripcion: empresa.descripcion || '',
-        }
-      : {
-          nivel: 'Sello',
-          estado: 'Activo',
-        },
+    ? {
+        nombre: empresa.nombre,
+        ruc: empresa.ruc,
+        nivel: empresa.nivel,
+        estado: empresa.estado,
+        descripcion: empresa.descripcion || '',
+        latitud: empresa.latitud ? parseFloat(empresa.latitud as any) : null,
+        longitud: empresa.longitud ? parseFloat(empresa.longitud as any) : null,
+        direccion: empresa.direccion,
+      }
+    : {
+        nivel: 'Sello',
+        estado: 'Activo',
+        latitud: null,
+        longitud: null,
+        direccion: null,
+      },
   });
 
   return (
@@ -103,6 +114,39 @@ export const EmpresaForm = ({ empresa, onSubmit, onCancel, isLoading }: EmpresaF
         />
         <p className="mt-1 text-xs text-gray-500">JPG, PNG (máx. 5MB)</p>
       </div>
+
+      {/* Google Maps Picker */}
+      <Controller
+        name="latitud"
+        control={control}
+        render={({ field: { value: latValue } }) => (
+          <Controller
+            name="longitud"
+            control={control}
+            render={({ field: { value: lngValue } }) => (
+              <Controller
+                name="direccion"
+                control={control}
+                render={({ field: { value: addressValue } }) => (
+                  <GoogleMapPicker
+                    value={{
+                      lat: latValue ?? null,
+                      lng: lngValue ?? null,
+                      address: addressValue ?? null,
+                    }}
+                    onChange={(location) => {
+                      setValue('latitud', location.lat);
+                      setValue('longitud', location.lng);
+                      setValue('direccion', location.address);
+                    }}
+                    error={errors.latitud?.message || errors.longitud?.message || errors.direccion?.message}
+                  />
+                )}
+              />
+            )}
+          />
+        )}
+      />
 
       {/* Buttons */}
       <div className="flex justify-end gap-3 pt-4">

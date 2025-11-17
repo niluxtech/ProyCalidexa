@@ -18,6 +18,9 @@ export interface Empresa {
   estado: 'Activo' | 'Inactivo';
   logo_url: string | null;
   descripcion: string | null;
+  latitud: number | null;
+  longitud: number | null;
+  direccion: string | null;
   created_at: string;
   updated_at: string;
 }
