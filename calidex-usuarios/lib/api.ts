@@ -1,10 +1,18 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
+// Detectar si estamos en desarrollo
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 // Helper para fetch con manejo de errores
 async function apiFetch<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${endpoint}`, {
     ...options,
-    next: { revalidate: 3600 }, // ISR: revalidar cada hora
+    // En desarrollo: sin caché para ver cambios inmediatos
+    // En producción: revalidar cada 60 segundos (balance entre rendimiento y actualización)
+    ...(isDevelopment 
+      ? { cache: 'no-store' }
+      : { next: { revalidate: 60 } } // Revalidar cada minuto en producción
+    ),
   });
 
   if (!res.ok) {
@@ -26,6 +34,9 @@ export interface Empresa {
   estado: 'Activo' | 'Inactivo';
   logo_url: string | null;
   descripcion: string | null;
+  latitud: number | null;
+  longitud: number | null;
+  direccion: string | null;
   created_at: string;
   updated_at: string;
 }

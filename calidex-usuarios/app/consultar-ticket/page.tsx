@@ -6,9 +6,27 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { api, TicketConsulta } from '@/lib/api';
-import Image from 'next/image';
 import Link from 'next/link';
 import AnimateOnScroll from '@/app/components/animate-on-scroll';
+
+// Helper para construir URL de imagen correctamente (igual que en adapters.ts)
+function buildImageUrl(imagePath: string | null): string {
+  if (!imagePath) return '/no-image.png';
+  
+  // Si ya es una URL completa, retornarla
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+  
+  const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || 'http://localhost:8000/storage';
+  
+  // Remover barra inicial si existe
+  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  
+  // Construir URL completa
+  const baseUrl = STORAGE_URL.endsWith('/') ? STORAGE_URL.slice(0, -1) : STORAGE_URL;
+  return `${baseUrl}/${cleanPath}`;
+}
 
 const ticketSchema = z.object({
   codigo_ticket: z
@@ -22,6 +40,7 @@ type TicketFormData = z.infer<typeof ticketSchema>;
 export default function ConsultarTicket() {
   const [resultado, setResultado] = useState<TicketConsulta | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [cacheBuster, setCacheBuster] = useState<number>(Date.now());
 
   const {
     register,
@@ -38,6 +57,7 @@ export default function ConsultarTicket() {
     try {
       const response = await api.consultarTicket(data.codigo_ticket);
       setResultado(response);
+      setCacheBuster(Date.now()); // Actualizar timestamp para evitar caché de imágenes
       toast.success('Ticket encontrado');
     } catch (error: any) {
       const message = error.message || 'Ticket no encontrado';
@@ -64,8 +84,6 @@ export default function ConsultarTicket() {
     };
     return textos[estado as keyof typeof textos] || estado;
   };
-
-  const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || '';
 
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
@@ -151,12 +169,13 @@ export default function ConsultarTicket() {
                   className="flex items-center gap-2 hover:opacity-80 transition"
                 >
                   {resultado.empresa.logo_url && (
-                    <Image
-                      src={`${STORAGE_URL}/${resultado.empresa.logo_url}`}
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={`${buildImageUrl(resultado.empresa.logo_url)}?v=${cacheBuster}`}
                       alt={resultado.empresa.nombre}
                       width={32}
                       height={32}
-                      className="rounded-full"
+                      className="rounded-full object-cover"
                     />
                   )}
                   <span className="font-medium text-[var(--color-primary)]">
@@ -224,4 +243,3 @@ export default function ConsultarTicket() {
     </main>
   );
 }
-
