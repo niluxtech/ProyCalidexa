@@ -122,7 +122,7 @@ export const api = {
   },
 
   // --- Contacto ---
-  enviarContacto: async (data: {
+enviarContacto: async (data: {
     nombre: string;
     email: string;
     telefono?: string;
@@ -130,15 +130,18 @@ export const api = {
   }) => {
     const res = await fetch(`${API_URL}/public/contacto`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
       body: JSON.stringify(data),
     });
-
+    
     if (!res.ok) {
       const error = await res.json().catch(() => ({ message: 'Error al enviar mensaje' }));
       throw new Error(error.message || 'Error al enviar mensaje');
     }
-
+    
     return res.json();
   },
 };

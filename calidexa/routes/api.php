@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\EmpresaController;
 use App\Http\Controllers\Api\NoticiaController;
 use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\ContactoController;
 
 // Rutas Públicas (sin autenticación)
 Route::prefix('public')->group(function () {
@@ -22,7 +23,8 @@ Route::prefix('public')->group(function () {
     
     // Consulta de ticket
     Route::post('/tickets/consultar', [TicketController::class, 'consultarPorCodigo']);
-    
+
+    Route::post('/contacto', [ContactoController::class, 'enviar']);    
 });
 
 // Autenticación
