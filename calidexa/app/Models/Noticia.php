@@ -24,6 +24,20 @@ class Noticia extends Model
         'publicado_at' => 'datetime',
     ];
 
+    // NUEVO: Agrega extracto e imagen al JSON
+    protected $appends = ['extracto', 'imagen'];
+
+    // NUEVO: Oculta imagen_url del JSON
+    protected $hidden = ['imagen_url'];
+
+    // NUEVO: Accessor para URL completa de imagen
+    public function getImagenAttribute()
+    {
+        return !empty($this->attributes['imagen_url'])
+            ? url('storage/' . $this->attributes['imagen_url']) 
+            : null;
+    }
+
     // Scopes
     public function scopePublicadas($query)
     {
@@ -37,7 +51,6 @@ class Noticia extends Model
         return $query->where('categoria', $categoria);
     }
 
-    // Generar slug automático
     protected static function boot()
     {
         parent::boot();

@@ -25,8 +25,22 @@ class Empresa extends Model
     ];
 
     protected $casts = [
-        'ruc' => 'encrypted', // Encripta automáticamente
+        'ruc' => 'encrypted',
     ];
+
+    // NUEVO: Agrega logo al JSON
+    protected $appends = ['logo'];
+
+    // NUEVO: Oculta logo_url del JSON
+    protected $hidden = ['logo_url'];
+
+    // NUEVO: Accessor para URL completa del logo
+    public function getLogoAttribute()
+    {
+        return !empty($this->attributes['logo_url'])
+            ? url('storage/' . $this->attributes['logo_url']) 
+            : null;
+    }
 
     // Relaciones
     public function tickets()
@@ -39,7 +53,7 @@ class Empresa extends Model
         return $this->hasMany(Ganador::class);
     }
 
-    // Scopes (filtros reutilizables)
+    // Scopes
     public function scopeActivas($query)
     {
         return $query->where('estado', 'Activo');
@@ -51,7 +65,6 @@ class Empresa extends Model
                     ->orWhere('slug', 'like', "%{$termino}%");
     }
 
-    // Evento: generar slug y código antes de crear
     protected static function boot()
     {
         parent::boot();
@@ -61,7 +74,7 @@ class Empresa extends Model
                 $empresa->slug = Str::slug($empresa->nombre);
             }
             if (empty($empresa->codigo)) {
-                $empresa->codigo = strtoupper(Str::random(9)); // EMPZ7BXS8
+                $empresa->codigo = strtoupper(Str::random(9));
             }
         });
     }
