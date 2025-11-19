@@ -28,8 +28,8 @@ export const LoginPage = () => {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: 'admin@calidexa.com',
-      password: 'password123',
+      email: '',
+      password: '',
     },
   });
 
@@ -108,12 +108,6 @@ export const LoginPage = () => {
               Iniciar Sesión
             </Button>
           </form>
-
-          {/* Footer */}
-          <div className="mt-6 text-center text-xs text-gray-500">
-            <p>Credenciales de prueba:</p>
-            <p className="font-medium">admin@calidexa.com / password123</p>
-          </div>
         </div>
       </div>
     </div>

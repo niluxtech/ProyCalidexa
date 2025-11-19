@@ -1,4 +1,4 @@
-import { Building2, Newspaper, Ticket, CheckCircle2, XCircle, Clock } from 'lucide-react';
+import { Building2, Newspaper, CheckCircle2, XCircle, Clock } from 'lucide-react';
 import { useDashboard } from '../hooks/useDashboard';
 import { KPICard } from './KPICard';
 import { RecentList } from './RecentList';
