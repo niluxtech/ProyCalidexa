@@ -14,9 +14,9 @@ export const NoticiaCard = ({ noticia, onEdit, onDelete }: NoticiaCardProps) => 
   return (
     <div className="rounded-lg border border-gray-200 bg-white overflow-hidden hover:shadow-md transition-shadow">
       {/* Imagen o Placeholder */}
-      {noticia.imagen_url ? (
+      {noticia.imagen ? (
         <img
-          src={`${import.meta.env.VITE_API_URL?.replace('/api', '')}/storage/${noticia.imagen_url}`}
+          src={noticia.imagen}
           alt={noticia.titulo}
           className="h-48 w-full object-cover"
         />

@@ -107,12 +107,30 @@ export const EmpresaForm = ({ empresa, onSubmit, onCancel, isLoading }: EmpresaF
           Logo (opcional)
         </label>
         <input
-          {...register('logo')}
+          {...register('logo', {
+            validate: (files) => {
+              if (files && files[0]) {
+                const file = files[0];
+                const maxSize = 5 * 1024 * 1024; // 5MB en bytes
+                if (file.size > maxSize) {
+                  return 'El archivo es demasiado grande. El tamaño máximo es 5MB.';
+                }
+                const validTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!validTypes.includes(file.type)) {
+                  return 'El archivo debe ser una imagen JPG o PNG.';
+                }
+              }
+              return true;
+            },
+          })}
           type="file"
           accept="image/jpeg,image/png,image/jpg"
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
         />
         <p className="mt-1 text-xs text-gray-500">JPG, PNG (máx. 5MB)</p>
+        {errors.logo && (
+          <p className="mt-1 text-xs text-red-600">{errors.logo.message as string}</p>
+        )}
       </div>
 
       {/* Google Maps Picker */}

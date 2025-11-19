@@ -2,22 +2,25 @@ import { Building2, Edit, Trash2 } from "lucide-react";
 import { Button } from "../../../components/ui";
 import type { Empresa } from "../../../types";
 
-
 interface EmpresaCardProps {
   empresa: Empresa;
   onEdit: (empresa: Empresa) => void;
   onDelete: (empresa: Empresa) => void;
 }
 
-export const EmpresaCard = ({ empresa, onEdit, onDelete }: EmpresaCardProps) => {
+export const EmpresaCard = ({
+  empresa,
+  onEdit,
+  onDelete,
+}: EmpresaCardProps) => {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
       {/* Logo o Icono */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          {empresa.logo_url ? (
+          {empresa.logo ? (
             <img
-              src={`${import.meta.env.VITE_API_URL?.replace('/api', '')}/storage/${empresa.logo_url}`}
+              src={empresa.logo}
               alt={empresa.nombre}
               className="h-12 w-12 rounded-lg object-cover"
             />
@@ -35,9 +38,9 @@ export const EmpresaCard = ({ empresa, onEdit, onDelete }: EmpresaCardProps) => 
         {/* Badge Estado */}
         <span
           className={`px-2 py-1 text-xs font-medium rounded-full ${
-            empresa.estado === 'Activo'
-              ? 'bg-green-100 text-green-700'
-              : 'bg-gray-100 text-gray-700'
+            empresa.estado === "Activo"
+              ? "bg-green-100 text-green-700"
+              : "bg-gray-100 text-gray-700"
           }`}
         >
           {empresa.estado}
@@ -50,7 +53,9 @@ export const EmpresaCard = ({ empresa, onEdit, onDelete }: EmpresaCardProps) => 
           <span className="font-medium">Nivel:</span> {empresa.nivel}
         </p>
         {empresa.descripcion && (
-          <p className="text-sm text-gray-600 line-clamp-2">{empresa.descripcion}</p>
+          <p className="text-sm text-gray-600 line-clamp-2">
+            {empresa.descripcion}
+          </p>
         )}
       </div>
 

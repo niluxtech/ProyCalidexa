@@ -16,7 +16,7 @@ export interface Empresa {
   ruc: string;
   nivel: 'Sello' | 'Certificado';
   estado: 'Activo' | 'Inactivo';
-  logo_url: string | null;
+  logo: string | null;
   descripcion: string | null;
   latitud: number | null;
   longitud: number | null;
@@ -31,7 +31,7 @@ export interface Noticia {
   slug: string;
   categoria: string;
   contenido: string;
-  imagen_url: string | null;
+  imagen: string | null;
   video_url: string | null;
   publicado_at: string | null;
   extracto?: string;

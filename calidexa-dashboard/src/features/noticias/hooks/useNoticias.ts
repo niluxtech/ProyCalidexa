@@ -27,7 +27,17 @@ export const useCreateNoticia = () => {
       toast.success('Noticia creada exitosamente');
     },
     onError: (error: any) => {
-      const message = error.response?.data?.message || 'Error al crear noticia';
+      let message = 'Error al crear noticia';
+      
+      // Manejar error 413 (Request Entity Too Large)
+      if (error.response?.status === 413) {
+        message = 'El archivo es demasiado grande. Por favor, reduce el tamaño de la imagen (máximo 5MB) o comprímela antes de subirla.';
+      } else if (error.response?.data?.message) {
+        message = error.response.data.message;
+      } else if (error.message) {
+        message = error.message;
+      }
+      
       toast.error(message);
     },
   });
@@ -44,7 +54,17 @@ export const useUpdateNoticia = () => {
       toast.success('Noticia actualizada exitosamente');
     },
     onError: (error: any) => {
-      const message = error.response?.data?.message || 'Error al actualizar noticia';
+      let message = 'Error al actualizar noticia';
+      
+      // Manejar error 413 (Request Entity Too Large)
+      if (error.response?.status === 413) {
+        message = 'El archivo es demasiado grande. Por favor, reduce el tamaño de la imagen (máximo 5MB) o comprímela antes de subirla.';
+      } else if (error.response?.data?.message) {
+        message = error.response.data.message;
+      } else if (error.message) {
+        message = error.message;
+      }
+      
       toast.error(message);
     },
   });
