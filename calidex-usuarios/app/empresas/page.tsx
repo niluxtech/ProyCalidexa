@@ -45,7 +45,7 @@ export default function Companies() {
           <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
-                Empresas acreditadas por CalidexA
+                Empresas certificadas por CalidexA
               </h1>
               <p className="text-[var(--color-text-grey)]">
                 Encuentre empresas confiables y certificadas que cumplen con

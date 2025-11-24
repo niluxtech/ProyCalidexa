@@ -78,14 +78,14 @@ export default function Footer() {
                   Empresas
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link 
                   href="/consultar-ticket" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Consultar Ticket
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link 
                   href="/contacto" 
