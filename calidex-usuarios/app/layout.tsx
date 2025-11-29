@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { Toaster } from "sonner";
+import LoadingProvider from "./components/loading-provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -64,9 +65,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${poppins.variable} antialiased flex flex-col min-h-screen`}>
-        <Navbar />
-        {children}
-        <Footer />
+        <LoadingProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </LoadingProvider>
         <Toaster position="top-right" richColors />
       </body>
     </html>

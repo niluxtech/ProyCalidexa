@@ -138,3 +138,45 @@ main {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari y Opera */
 }
+
+/* Animaciones para el loader */
+@keyframes loader-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes dot-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes dot-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-progress {
+  animation: loader-progress 2s ease-in-out infinite;
+}
+
+.loader-dot {
+  animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+.loader-container {
+  animation: dot-rotate 20s linear infinite;
+}
