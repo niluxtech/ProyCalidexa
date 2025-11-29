@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Loader from "./loader";
 
-export default function LoadingProvider({ children }: { children: React.ReactNode }) {
+function LoadingContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -71,3 +71,10 @@ export default function LoadingProvider({ children }: { children: React.ReactNod
   );
 }
 
+export default function LoadingProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense fallback={<Loader />}>
+      <LoadingContent>{children}</LoadingContent>
+    </Suspense>
+  );
+}
