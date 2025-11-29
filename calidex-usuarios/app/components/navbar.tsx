@@ -50,7 +50,7 @@ export default function Navbar() {
                 Empresas
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/consultar-ticket"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
@@ -59,7 +59,7 @@ export default function Navbar() {
               >
                 Consultar Ticket
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/contacto"
@@ -125,7 +125,7 @@ export default function Navbar() {
                   Empresas
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/consultar-ticket"
                   className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
@@ -133,7 +133,7 @@ export default function Navbar() {
                 >
                   Consultar Ticket
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/contacto"

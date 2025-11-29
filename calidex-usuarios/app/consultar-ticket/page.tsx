@@ -10,7 +10,7 @@ import Link from 'next/link';
 import AnimateOnScroll from '@/app/components/animate-on-scroll';
 
 // Helper para construir URL de imagen correctamente (igual que en adapters.ts)
-function buildImageUrl(imagePath: string | null): string {
+function buildImageUrl(imagePath: string | null | undefined): string {
   if (!imagePath) return '/no-image.png';
   
   // Si ya es una URL completa, retornarla
@@ -168,10 +168,10 @@ export default function ConsultarTicket() {
                   href={`/empresas/${resultado.empresa.codigo.toLowerCase()}`}
                   className="flex items-center gap-2 hover:opacity-80 transition"
                 >
-                  {resultado.empresa.logo_url && (
+                  {((resultado.empresa as any).logo || resultado.empresa.logo_url) && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={`${buildImageUrl(resultado.empresa.logo_url)}?v=${cacheBuster}`}
+                      src={`${buildImageUrl((resultado.empresa as any).logo || resultado.empresa.logo_url)}?v=${cacheBuster}`}
                       alt={resultado.empresa.nombre}
                       width={32}
                       height={32}

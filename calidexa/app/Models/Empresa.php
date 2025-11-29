@@ -28,18 +28,21 @@ class Empresa extends Model
         'ruc' => 'encrypted',
     ];
 
-    // NUEVO: Agrega logo al JSON
+    // NUEVO: Agrega logo al JSON, pero también mantenemos logo_url para compatibilidad
     protected $appends = ['logo'];
-
-    // NUEVO: Oculta logo_url del JSON
-    protected $hidden = ['logo_url'];
 
     // NUEVO: Accessor para URL completa del logo
     public function getLogoAttribute()
     {
-        return !empty($this->attributes['logo_url'])
-            ? url('storage/' . $this->attributes['logo_url']) 
-            : null;
+        if (empty($this->attributes['logo_url'])) {
+            return null;
+        }
+        
+        // Usar STORAGE_URL si está configurado, sino usar APP_URL
+        $storageUrl = env('STORAGE_URL', env('APP_URL') . '/storage');
+        $cleanPath = ltrim($this->attributes['logo_url'], '/');
+        
+        return rtrim($storageUrl, '/') . '/' . $cleanPath;
     }
 
     // Relaciones

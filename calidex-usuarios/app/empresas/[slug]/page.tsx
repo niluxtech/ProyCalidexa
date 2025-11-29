@@ -14,6 +14,8 @@ export async function generateMetadata({ params }: CompanyDetailProps) {
 
   try {
     const empresa = await api.getEmpresaPorSlug(slug);
+    // El backend puede devolver 'logo' (accessor) o 'logo_url' (campo directo)
+    const logoPath = (empresa as any).logo || empresa.logo_url;
     const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || '';
 
     return {
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: CompanyDetailProps) {
       openGraph: {
         title: empresa.nombre,
         description: empresa.descripcion || '',
-        images: empresa.logo_url ? [`${STORAGE_URL}/${empresa.logo_url}`] : [],
+        images: logoPath ? (logoPath.startsWith('http') ? [logoPath] : [`${STORAGE_URL}/${logoPath}`]) : [],
       },
     };
   } catch {
@@ -43,7 +45,7 @@ export default async function CompanyDetail({ params }: CompanyDetailProps) {
   }
 
   // Helper para construir URL de imagen
-  const buildImageUrl = (imagePath: string | null): string => {
+  const buildImageUrl = (imagePath: string | null | undefined): string => {
     if (!imagePath) return '/no-image.png';
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       return imagePath;
@@ -54,7 +56,9 @@ export default async function CompanyDetail({ params }: CompanyDetailProps) {
     return `${baseUrl}/${cleanPath}`;
   };
 
-  const logoUrl = buildImageUrl(empresa.logo_url);
+  // El backend puede devolver 'logo' (accessor) o 'logo_url' (campo directo)
+  const logoPath = (empresa as any).logo || empresa.logo_url;
+  const logoUrl = buildImageUrl(logoPath);
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://calidexa.pe/empresas/${empresa.slug}`;
 
   // Structured data para SEO

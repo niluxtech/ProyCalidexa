@@ -24,18 +24,21 @@ class Noticia extends Model
         'publicado_at' => 'datetime',
     ];
 
-    // NUEVO: Agrega extracto e imagen al JSON
+    // NUEVO: Agrega extracto e imagen al JSON, pero también mantenemos imagen_url para compatibilidad
     protected $appends = ['extracto', 'imagen'];
-
-    // NUEVO: Oculta imagen_url del JSON
-    protected $hidden = ['imagen_url'];
 
     // NUEVO: Accessor para URL completa de imagen
     public function getImagenAttribute()
     {
-        return !empty($this->attributes['imagen_url'])
-            ? url('storage/' . $this->attributes['imagen_url']) 
-            : null;
+        if (empty($this->attributes['imagen_url'])) {
+            return null;
+        }
+        
+        // Usar STORAGE_URL si está configurado, sino usar APP_URL
+        $storageUrl = env('STORAGE_URL', env('APP_URL') . '/storage');
+        $cleanPath = ltrim($this->attributes['imagen_url'], '/');
+        
+        return rtrim($storageUrl, '/') . '/' . $cleanPath;
     }
 
     // Scopes

@@ -13,6 +13,8 @@ export async function generateMetadata({ params }: NewsDetailProps) {
 
   try {
     const noticia = await api.getNoticiaPorSlug(slug);
+    // El backend puede devolver 'imagen' (accessor) o 'imagen_url' (campo directo)
+    const imagenPath = (noticia as any).imagen || noticia.imagen_url;
     const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || '';
 
     return {
@@ -21,8 +23,8 @@ export async function generateMetadata({ params }: NewsDetailProps) {
       openGraph: {
         title: noticia.titulo,
         description: noticia.extracto || '',
-        images: noticia.imagen_url
-          ? [`${STORAGE_URL}/${noticia.imagen_url}`]
+        images: imagenPath
+          ? (imagenPath.startsWith('http') ? [imagenPath] : [`${STORAGE_URL}/${imagenPath}`])
           : [],
       },
     };
@@ -44,7 +46,7 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
   }
 
   // Helper para construir URL de imagen
-  const buildImageUrl = (imagePath: string | null): string => {
+  const buildImageUrl = (imagePath: string | null | undefined): string => {
     if (!imagePath) return '/no-image.png';
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       return imagePath;
@@ -55,7 +57,9 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
     return `${baseUrl}/${cleanPath}`;
   };
 
-  const imagenUrl = buildImageUrl(noticia.imagen_url);
+  // El backend puede devolver 'imagen' (accessor) o 'imagen_url' (campo directo)
+  const imagenPath = (noticia as any).imagen || noticia.imagen_url;
+  const imagenUrl = buildImageUrl(imagenPath);
 
   const fecha = new Date(noticia.publicado_at || noticia.created_at).toLocaleDateString('es-PE', {
     year: 'numeric',

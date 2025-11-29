@@ -3,7 +3,7 @@ import { Empresa, Noticia } from './api';
 const STORAGE_URL = process.env.NEXT_PUBLIC_STORAGE_URL || 'http://localhost:8000/storage';
 
 // Helper para construir URL de imagen correctamente
-function buildImageUrl(imagePath: string | null): string {
+function buildImageUrl(imagePath: string | null | undefined): string {
   if (!imagePath) return '/no-image.png';
   
   // Si ya es una URL completa, retornarla
@@ -20,23 +20,27 @@ function buildImageUrl(imagePath: string | null): string {
 }
 
 // Convierte Empresa de Laravel → Formato de CompanyCard
-export function adaptEmpresaToCard(empresa: Empresa) {
+export function adaptEmpresaToCard(empresa: Empresa & { logo?: string | null }) {
+  // El backend puede devolver 'logo' (accessor) o 'logo_url' (campo directo)
+  const logoPath = (empresa as any).logo || empresa.logo_url;
   return {
     id: empresa.id.toString(),
     name: empresa.nombre,
     description: empresa.descripcion || 'Sin descripción disponible',
-    logo: buildImageUrl(empresa.logo_url),
+    logo: buildImageUrl(logoPath),
     slug: empresa.slug,
   };
 }
 
 // Convierte Noticia de Laravel → Formato de NewsCard (página /noticias)
-export function adaptNoticiaToCard(noticia: Noticia) {
+export function adaptNoticiaToCard(noticia: Noticia & { imagen?: string | null }) {
   const fecha = new Date(noticia.publicado_at || noticia.created_at);
+  // El backend puede devolver 'imagen' (accessor) o 'imagen_url' (campo directo)
+  const imagenPath = (noticia as any).imagen || noticia.imagen_url;
 
   return {
     id: noticia.id.toString(),
-    image: buildImageUrl(noticia.imagen_url),
+    image: buildImageUrl(imagenPath),
     date: fecha.toLocaleDateString('es-PE', {
       year: 'numeric',
       month: 'long',
@@ -49,8 +53,10 @@ export function adaptNoticiaToCard(noticia: Noticia) {
 }
 
 // Convierte Noticia de Laravel → Formato de NewsCard Home (landing)
-export function adaptNoticiaToHomeCard(noticia: Noticia) {
+export function adaptNoticiaToHomeCard(noticia: Noticia & { imagen?: string | null }) {
   const fecha = new Date(noticia.publicado_at || noticia.created_at);
+  // El backend puede devolver 'imagen' (accessor) o 'imagen_url' (campo directo)
+  const imagenPath = (noticia as any).imagen || noticia.imagen_url;
 
   return {
     id: noticia.id.toString(),
@@ -62,17 +68,19 @@ export function adaptNoticiaToHomeCard(noticia: Noticia) {
     }),
     category: noticia.categoria,
     author: 'CalidexA',
-    image: buildImageUrl(noticia.imagen_url),
+    image: buildImageUrl(imagenPath),
     slug: noticia.slug,
   };
 }
 
 // Convierte Empresa de Laravel → Formato para carrusel de logos
-export function adaptEmpresaToLogo(empresa: Empresa) {
+export function adaptEmpresaToLogo(empresa: Empresa & { logo?: string | null }) {
+  // El backend puede devolver 'logo' (accessor) o 'logo_url' (campo directo)
+  const logoPath = (empresa as any).logo || empresa.logo_url;
   return {
     id: empresa.id.toString(),
     nombre: empresa.nombre,
-    logo: buildImageUrl(empresa.logo_url),
+    logo: buildImageUrl(logoPath),
     slug: empresa.slug,
   };
 }
