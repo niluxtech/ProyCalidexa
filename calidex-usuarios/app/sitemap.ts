@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { api } from '@/lib/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://calidexa.pe';
+  const baseUrl = 'https://comunidad.calidexa.pe/';
 
   // Páginas estáticas
   const routes = [
@@ -35,8 +35,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Empresas dinámicas
   let empresasUrls: MetadataRoute.Sitemap = [];
   try {
-    const empresas = await api.getEmpresas();
-    empresasUrls = empresas.map((empresa) => ({
+    const empresasResponse = await api.getEmpresas();
+    const empresasArray = Array.isArray(empresasResponse) 
+      ? empresasResponse 
+      : empresasResponse.data;
+    
+    empresasUrls = empresasArray.map((empresa) => ({
       url: `${baseUrl}/empresas/${empresa.slug}`,
       lastModified: new Date(empresa.updated_at),
       changeFrequency: 'monthly' as const,
