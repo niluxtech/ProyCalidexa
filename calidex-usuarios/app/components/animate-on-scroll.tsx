@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 interface AnimateOnScrollProps {
@@ -21,9 +21,15 @@ export default function AnimateOnScroll({
   triggerOnce = true,
 }: AnimateOnScrollProps) {
   const elementRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const { ref, inView } = useInView({
     threshold,
     triggerOnce,
+    // Verificar si está en vista inicialmente
+    initialInView: false,
+    // Usar rootMargin para activar un poco antes
+    rootMargin: '0px 0px -50px 0px',
   });
 
   // Combinar ambos refs
@@ -36,18 +42,63 @@ export default function AnimateOnScroll({
     }
   };
 
+  // Inicializar estado oculto
   useEffect(() => {
-    if (inView && elementRef.current) {
+    if (elementRef.current && !isInitialized) {
       const element = elementRef.current;
-      element.classList.add("animate__animated", `animate__${animation}`);
-      if (delay) {
-        element.classList.add(`animate__${delay}`);
+      // Verificar si el elemento está en el viewport al montarse
+      const rect = element.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInViewport && !inView) {
+        // Ocultar solo si no está en vista
+        element.style.opacity = '0';
+        element.style.visibility = 'hidden';
+      } else if (isInViewport) {
+        // Si está en vista, mostrar inmediatamente con animación
+        element.style.opacity = '1';
+        element.style.visibility = 'visible';
+        element.classList.add("animate__animated", `animate__${animation}`);
+        if (delay) {
+          element.classList.add(`animate__${delay}`);
+        }
+        setHasAnimated(true);
       }
+      setIsInitialized(true);
     }
-  }, [inView, animation, delay]);
+  }, [inView, isInitialized, animation, delay]);
+
+  useEffect(() => {
+    if (elementRef.current && isInitialized && inView && !hasAnimated) {
+      const element = elementRef.current;
+      
+      // Pequeño delay para asegurar renderizado
+      const timer = setTimeout(() => {
+        // Mostrar elemento
+        element.style.opacity = '1';
+        element.style.visibility = 'visible';
+        
+        // Agregar animación
+        element.classList.add("animate__animated", `animate__${animation}`);
+        if (delay) {
+          element.classList.add(`animate__${delay}`);
+        }
+        
+        setHasAnimated(true);
+      }, 50);
+
+      return () => clearTimeout(timer);
+    }
+  }, [inView, animation, delay, hasAnimated, isInitialized]);
 
   return (
-    <div ref={combinedRef} className={className}>
+    <div 
+      ref={combinedRef} 
+      className={className}
+      style={{ 
+        willChange: 'opacity, transform',
+      }}
+    >
       {children}
     </div>
   );

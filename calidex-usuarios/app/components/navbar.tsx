@@ -50,6 +50,16 @@ export default function Navbar() {
                 Empresas
               </Link>
             </li>
+            <li>
+              <Link
+                href="/como-trabajamos"
+                className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
+                  isActive("/como-trabajamos") ? "text-[var(--color-secondary)]" : ""
+                }`}
+              >
+                ¿Cómo Trabajamos?
+              </Link>
+            </li>
             {/* <li>
               <Link
                 href="/consultar-ticket"
@@ -123,6 +133,15 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Empresas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/como-trabajamos"
+                  className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  ¿Cómo Trabajamos?
                 </Link>
               </li>
               {/* <li>
