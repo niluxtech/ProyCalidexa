@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description: "Acreditamos empresas que cumplen lo que prometen",
     images: [
       {
-        url: "/logo-calidexa.png",
+        url: "/logoCalidexa.png",
         width: 1200,
         height: 630,
         alt: "CalidexA",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CalidexA",
     description: "Certificación de Calidad Empresarial en Perú",
-    images: ["/logo-calidexa.png"],
+    images: ["/logoCalidexa.png"],
   },
   robots: {
     index: true,

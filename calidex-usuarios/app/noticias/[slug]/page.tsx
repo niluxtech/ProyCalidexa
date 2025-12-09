@@ -45,6 +45,24 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
     notFound();
   }
 
+  // Obtener todas las noticias para navegación
+  let todasNoticias: any[] = [];
+  let noticiaAnterior: any = null;
+  let noticiaSiguiente: any = null;
+  try {
+    const response = await api.getNoticias();
+    todasNoticias = response.data || [];
+    const currentIndex = todasNoticias.findIndex((n) => n.slug === slug);
+    if (currentIndex > 0) {
+      noticiaAnterior = todasNoticias[currentIndex - 1];
+    }
+    if (currentIndex < todasNoticias.length - 1 && currentIndex !== -1) {
+      noticiaSiguiente = todasNoticias[currentIndex + 1];
+    }
+  } catch (error) {
+    console.error("Error al cargar noticias para navegación:", error);
+  }
+
   // Helper para construir URL de imagen
   const buildImageUrl = (imagePath: string | null | undefined): string => {
     if (!imagePath) return '/no-image.png';
@@ -84,7 +102,7 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
       "name": "CalidexA",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://calidexa.pe/logo-calidexa.png"
+        "url": "https://calidexa.pe/logoCalidexa.png"
       }
     },
     "description": noticia.extracto || noticia.contenido.substring(0, 160).replace(/<[^>]*>/g, ''),
@@ -166,15 +184,69 @@ export default async function NewsDetail({ params }: NewsDetailProps) {
             </AnimateOnScroll>
           )}
 
-          {/* Botón volver */}
+          {/* Navegación: Anterior, Siguiente y Volver */}
           <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
-            <div className="text-center pt-8 mt-8 border-t border-gray-200">
-              <Link
-                href="/noticias"
-                className="inline-block text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-8 py-3 rounded-full transition-colors"
-              >
-                ← Volver a Noticias
-              </Link>
+            <div className="pt-8 mt-8 border-t border-gray-200">
+              {/* Botones Anterior y Siguiente */}
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+                {noticiaAnterior ? (
+                  <Link
+                    href={`/noticias/${noticiaAnterior.slug}`}
+                    className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-6 py-2 rounded-full transition-colors"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                    <span className="hidden sm:inline">Anterior</span>
+                    <span className="sm:hidden">←</span>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+                {noticiaSiguiente ? (
+                  <Link
+                    href={`/noticias/${noticiaSiguiente.slug}`}
+                    className="flex items-center gap-2 text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-6 py-2 rounded-full transition-colors"
+                  >
+                    <span className="hidden sm:inline">Siguiente</span>
+                    <span className="sm:hidden">→</span>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </Link>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+              {/* Botón Volver */}
+              <div className="text-center">
+                <Link
+                  href="/noticias"
+                  className="inline-block text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-8 py-3 rounded-full transition-colors"
+                >
+                  ← Volver a Noticias
+                </Link>
+              </div>
             </div>
           </AnimateOnScroll>
         </article>

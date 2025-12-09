@@ -376,7 +376,7 @@ export default function ComoTrabajamos() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/empresas"
+                href="https://mensaje.calidexa.pe/"
                 className="inline-block bg-white text-[var(--color-primary)] font-medium px-8 py-3 rounded-full hover:opacity-90 transition-all border-2 border-white"
               >
                 Buscar empresas seguras

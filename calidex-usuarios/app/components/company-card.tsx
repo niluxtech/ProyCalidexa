@@ -40,7 +40,7 @@ export default function CompanyCard({
 
       {/* Botón */}
       <Link
-        href={`/empresas/${slug}`}
+        href="https://mensaje.calidexa.pe/"
         className="inline-block text-[var(--color-primary)] hover:text-[var(--color-secondary)] font-medium border border-[var(--color-primary)] hover:border-[var(--color-secondary)] px-6 py-2 rounded-full transition-colors"
       >
         Ver detalles

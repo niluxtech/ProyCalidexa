@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="flex flex-col items-start">
             <Link href="/" className="mb-4">
               <Image 
-                src="/logo-calidexa.png" 
+                src="/logoCalidexa.png" 
                 alt="Calidexa Logo" 
                 width={140}
                 height={56}
@@ -44,13 +44,13 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="tel:+51987654321" 
+                  href="tel:+51929565908" 
                   className="flex items-center gap-2 text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  +51 987654321
+                  +51 929565908
                 </a>
               </li>
             </ul>
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/empresas" 
+                  href="https://mensaje.calidexa.pe/" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Empresas

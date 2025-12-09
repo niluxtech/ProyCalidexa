@@ -19,7 +19,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image
-              src="/logo-calidexa.png"
+              src="/logoCalidexa.png"
               alt="Calidexa Logo"
               width={120}
               height={50}
@@ -42,7 +42,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/empresas"
+                href="https://mensaje.calidexa.pe/"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
                   isActive("/empresas") ? "text-[var(--color-secondary)]" : ""
                 }`}
@@ -53,8 +53,8 @@ export default function Navbar() {
             <li>
               <Link
                 href="/como-trabajamos"
-                className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
-                  isActive("/como-trabajamos") ? "text-[var(--color-secondary)]" : ""
+                className={`text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
+                  isActive("/como-trabajamos") ? "text-[var(--color-primary)]" : ""
                 }`}
               >
                 ¿Cómo Trabajamos?
@@ -128,7 +128,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="/empresas"
+                  href="https://mensaje.calidexa.pe/"
                   className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -138,7 +138,7 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/como-trabajamos"
-                  className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
+                  className="block text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   ¿Cómo Trabajamos?

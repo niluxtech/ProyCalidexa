@@ -79,7 +79,7 @@ export default async function Home() {
                   {empresasLogos.map((empresa, index) => (
                     <Link
                       key={empresa.id}
-                      href={`/empresas/${empresa.slug}`}
+                      href="https://mensaje.calidexa.pe/"
                       className="flex-shrink-0 group"
                       style={{
                         animationDelay: `${index * 0.1}s`,

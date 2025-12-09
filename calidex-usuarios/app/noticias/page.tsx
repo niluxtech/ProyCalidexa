@@ -43,10 +43,11 @@ export default function News() {
   // Filtrar por búsqueda y categoría
   useEffect(() => {
     let filtered = [...todasNoticias];
-    // Filtrar por búsqueda
+    // Filtrar por búsqueda (título y descripción)
     if (search) {
       filtered = filtered.filter((noticia) =>
-        noticia.title.toLowerCase().includes(search.toLowerCase())
+        noticia.title.toLowerCase().includes(search.toLowerCase()) ||
+        noticia.description.toLowerCase().includes(search.toLowerCase())
       );
     }
     // Filtrar por categoría

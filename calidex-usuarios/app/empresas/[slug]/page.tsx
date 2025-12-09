@@ -90,7 +90,7 @@ export default async function CompanyDetail({ params }: CompanyDetailProps) {
               </Link>{" "}
               /{" "}
               <Link
-                href="/empresas"
+                href="https://mensaje.calidexa.pe/"
                 className="hover:text-[var(--color-primary)]"
               >
                 Empresas

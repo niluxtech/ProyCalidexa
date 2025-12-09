@@ -36,9 +36,11 @@ export default function NewCard({
       <div className="p-6 flex flex-col text-left">
         <p className="text-sm text-gray-500 mb-2">{date}</p>
 
-        <h3 className="text-lg font-semibold text-[var(--color-primary)] mb-2 line-clamp-3">
-          {title}
-        </h3>
+        <Link href={`/noticias/${slug}`}>
+          <h3 className="text-lg font-semibold text-[var(--color-primary)] mb-2 line-clamp-3 hover:text-[var(--color-secondary)] transition-colors cursor-pointer">
+            {title}
+          </h3>
+        </Link>
 
         <p className="text-sm text-[var(--color-text-grey)] mb-3 line-clamp-4">
           {description}

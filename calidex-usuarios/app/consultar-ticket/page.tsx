@@ -165,7 +165,7 @@ export default function ConsultarTicket() {
               <div className="flex items-center justify-between border-b border-gray-200 pb-3">
                 <span className="text-sm text-gray-600">Empresa:</span>
                 <Link
-                  href={`/empresas/${resultado.empresa.codigo.toLowerCase()}`}
+                  href="https://mensaje.calidexa.pe/"
                   className="flex items-center gap-2 hover:opacity-80 transition"
                 >
                   {((resultado.empresa as any).logo || resultado.empresa.logo_url) && (

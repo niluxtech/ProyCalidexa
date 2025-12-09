@@ -8,19 +8,22 @@ import { adaptEmpresaToCard } from "@/lib/adapters";
 
 export default function Companies() {
   const [empresas, setEmpresas] = useState<any[]>([]);
+  const [todasEmpresas, setTodasEmpresas] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  // Cargar todas las empresas inicialmente
   useEffect(() => {
-    const fetchEmpresas = async () => {
+    const fetchTodasEmpresas = async () => {
       setIsLoading(true);
       try {
-        const response = await api.getEmpresas(search || undefined);
+        const response = await api.getEmpresas();
         // Manejar tanto array directo como respuesta paginada
         const empresasArray = Array.isArray(response) 
           ? response 
           : (response as any)?.data || [];
         const adaptadas = empresasArray.map(adaptEmpresaToCard);
+        setTodasEmpresas(adaptadas);
         setEmpresas(adaptadas);
       } catch (error) {
         console.error("Error al cargar empresas:", error);
@@ -29,14 +32,23 @@ export default function Companies() {
         setIsLoading(false);
       }
     };
+    fetchTodasEmpresas();
+  }, []);
 
-    // Debounce para búsqueda
-    const timer = setTimeout(() => {
-      fetchEmpresas();
-    }, 300);
+  // Filtrar empresas por búsqueda (nombre y descripción)
+  useEffect(() => {
+    if (!search) {
+      setEmpresas(todasEmpresas);
+      return;
+    }
 
-    return () => clearTimeout(timer);
-  }, [search]);
+    const searchLower = search.toLowerCase();
+    const filtered = todasEmpresas.filter((empresa) =>
+      empresa.name.toLowerCase().includes(searchLower) ||
+      empresa.description.toLowerCase().includes(searchLower)
+    );
+    setEmpresas(filtered);
+  }, [search, todasEmpresas]);
 
   return (
     <main className="min-h-screen bg-gray-50">
