@@ -2,21 +2,49 @@ import Image from "next/image";
 import Link from "next/link";
 import { api } from "@/lib/api";
 import { adaptEmpresaToLogo } from "@/lib/adapters";
-import { 
-  CheckCircle2, 
-  Star, 
-  Users, 
-  Target, 
+import {
+  CheckCircle2,
+  Star,
+  Users,
+  Target,
   FileCheck,
   Shield,
   TrendingUp,
-  Award
+  Award,
 } from "lucide-react";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Nosotros | CalidexA",
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
+
+export const metadata: Metadata = {
+  title: "CalidexA",
   description:
     "Conoce más sobre CalidexA, un sistema de confianza para el mercado peruano que construye confianza entre empresas y personas.",
+  alternates: {
+    canonical: `${baseUrl}/nosotros`,
+  },
+  openGraph: {
+    title: "CalidexA",
+    description:
+      "Conoce más sobre CalidexA, un sistema de confianza para el mercado peruano que construye confianza entre empresas y personas.",
+    url: `${baseUrl}/nosotros`,
+    siteName: "CalidexA",
+    images: [
+      {
+        url: `${baseUrl}/logoCalidexa.png`,
+        width: 1200,
+        height: 630,
+        alt: "CalidexA - Nosotros",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CalidexA",
+    description:
+      "Conoce más sobre CalidexA, un sistema de confianza para el mercado peruano.",
+    images: [`${baseUrl}/logoCalidexa.png`],
+  },
 };
 
 export default async function Nosotros() {
@@ -88,10 +116,13 @@ export default async function Nosotros() {
                   Somos un sistema de confianza para el mercado peruano
                 </h2>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
-                  Calidexa nace como una iniciativa independiente que identifica, reconoce y promueve a las empresas que cumplen con calidad, transparencia y buenas prácticas.
+                  Calidexa nace como una iniciativa independiente que
+                  identifica, reconoce y promueve a las empresas que cumplen con
+                  calidad, transparencia y buenas prácticas.
                 </p>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Nuestro propósito es simple: que cualquier persona pueda elegir con seguridad.
+                  Nuestro propósito es simple: que cualquier persona pueda
+                  elegir con seguridad.
                 </p>
               </div>
             </div>
@@ -129,7 +160,9 @@ export default async function Nosotros() {
                   Creemos que la confianza no debería ser un riesgo.
                 </p>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Nuestro objetivo es construir una comunidad donde las empresas cumplan lo que prometen y donde el público pueda tomar decisiones informadas.
+                  Nuestro objetivo es construir una comunidad donde las empresas
+                  cumplan lo que prometen y donde el público pueda tomar
+                  decisiones informadas.
                 </p>
               </div>
             </div>
@@ -164,10 +197,13 @@ export default async function Nosotros() {
                   Evaluamos, verificamos y reconocemos el buen servicio
                 </h2>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
-                  En Calidexa analizamos buenas prácticas, recopilamos evidencias, promovemos compromisos de calidad y monitoreamos que se cumpla lo prometido.
+                  En Calidexa analizamos buenas prácticas, recopilamos
+                  evidencias, promovemos compromisos de calidad y monitoreamos
+                  que se cumpla lo prometido.
                 </p>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Así, garantizamos que cada sello entregado realmente represente confianza.
+                  Así, garantizamos que cada sello entregado realmente
+                  represente confianza.
                 </p>
               </div>
             </div>
@@ -199,19 +235,19 @@ export default async function Nosotros() {
                   className="flex-shrink-0 group"
                   title={empresa.nombre}
                 >
-                    <div className="relative w-24 h-16 sm:w-28 sm:h-20 flex items-center justify-center bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[var(--color-primary)]/20">
-                      <Image
-                        src={empresa.logo}
-                        alt={`Logo de ${empresa.nombre}`}
-                        width={100}
-                        height={60}
-                        className="object-fill rounded-lg opacity-70 group-hover:opacity-100 transition-opacity duration-300 max-h-full"
-                        unoptimized={
-                          empresa.logo.startsWith("http://localhost") ||
-                          empresa.logo.startsWith("https://")
-                        }
-                      />
-                    </div>
+                  <div className="relative w-24 h-16 sm:w-28 sm:h-20 flex items-center justify-center bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-[var(--color-primary)]/20">
+                    <Image
+                      src={empresa.logo}
+                      alt={`Logo de ${empresa.nombre}`}
+                      width={100}
+                      height={60}
+                      className="object-fill rounded-lg opacity-70 group-hover:opacity-100 transition-opacity duration-300 max-h-full"
+                      unoptimized={
+                        empresa.logo.startsWith("http://localhost") ||
+                        empresa.logo.startsWith("https://")
+                      }
+                    />
+                  </div>
                 </Link>
               ))}
             </div>
@@ -276,8 +312,13 @@ export default async function Nosotros() {
                   key={index}
                   className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col border-2 border-transparent hover:border-[var(--color-primary)]/20 group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] min-w-[280px] max-w-[350px]"
                 >
-                  <div className={`w-16 h-16 ${caracteristica.bgColor} ${caracteristica.borderColor} rounded-xl flex items-center justify-center mb-6 mx-auto border-2 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className={`w-8 h-8 ${caracteristica.color}`} strokeWidth={2} />
+                  <div
+                    className={`w-16 h-16 ${caracteristica.bgColor} ${caracteristica.borderColor} rounded-xl flex items-center justify-center mb-6 mx-auto border-2 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <IconComponent
+                      className={`w-8 h-8 ${caracteristica.color}`}
+                      strokeWidth={2}
+                    />
                   </div>
                   <h3 className="text-xl font-bold text-[var(--color-primary)] mb-4 text-center group-hover:text-[var(--color-secondary)] transition-colors">
                     {caracteristica.title}
@@ -297,10 +338,13 @@ export default async function Nosotros() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Únete a la comunidad que está transformando la confianza en el Perú
+              Únete a la comunidad que está transformando la confianza en el
+              Perú
             </h2>
             <p className="text-lg mb-8 text-white/90 leading-relaxed">
-              Si eres una empresa comprometida con la calidad y la transparencia, o si buscas tomar decisiones informadas, Calidexa es para ti.
+              Si eres una empresa comprometida con la calidad y la
+              transparencia, o si buscas tomar decisiones informadas, Calidexa
+              es para ti.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -322,4 +366,3 @@ export default async function Nosotros() {
     </main>
   );
 }
-

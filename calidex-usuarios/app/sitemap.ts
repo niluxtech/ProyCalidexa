@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { api } from '@/lib/api';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://comunidad.calidexa.pe/';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://calidexa.pe';
 
   // Páginas estáticas
   const routes = [

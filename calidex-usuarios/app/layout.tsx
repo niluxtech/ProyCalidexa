@@ -12,7 +12,10 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://calidexa.pe';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(baseUrl),
   title: {
     default: "CalidexA - Certificación de Calidad Empresarial en Perú",
     template: "%s | CalidexA"
@@ -22,16 +25,19 @@ export const metadata: Metadata = {
   authors: [{ name: "CalidexA" }],
   creator: "CalidexA",
   publisher: "CalidexA",
+  alternates: {
+    canonical: baseUrl,
+  },
   openGraph: {
     type: "website",
     locale: "es_PE",
-    url: "https://calidexa.pe",
+    url: baseUrl,
     siteName: "CalidexA",
     title: "CalidexA - Certificación de Calidad Empresarial",
     description: "Acreditamos empresas que cumplen lo que prometen",
     images: [
       {
-        url: "/logoCalidexa.png",
+        url: `${baseUrl}/logoCalidexa.png`,
         width: 1200,
         height: 630,
         alt: "CalidexA",
@@ -42,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CalidexA",
     description: "Certificación de Calidad Empresarial en Perú",
-    images: ["/logoCalidexa.png"],
+    images: [`${baseUrl}/logoCalidexa.png`],
   },
   robots: {
     index: true,
