@@ -78,6 +78,22 @@ export default function Footer() {
                   Empresas
                 </Link>
               </li>
+              <li>
+                <Link 
+                  href="/nosotros" 
+                  className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
+                >
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/como-trabajamos" 
+                  className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
+                >
+                  ¿Cómo Trabajamos?
+                </Link>
+              </li>
               {/* <li>
                 <Link 
                   href="/consultar-ticket" 

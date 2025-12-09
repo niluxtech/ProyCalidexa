@@ -52,6 +52,16 @@ export default function Navbar() {
             </li>
             <li>
               <Link
+                href="/nosotros"
+                className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
+                  isActive("/nosotros") ? "text-[var(--color-secondary)]" : ""
+                }`}
+              >
+                Nosotros
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/como-trabajamos"
                 className={`text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
                   isActive("/como-trabajamos") ? "text-[var(--color-primary)]" : ""
@@ -133,6 +143,15 @@ export default function Navbar() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Empresas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/nosotros"
+                  className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Nosotros
                 </Link>
               </li>
               <li>
