@@ -10,6 +10,7 @@ interface NewsDetailProps {
 
 export async function generateMetadata({ params }: NewsDetailProps) {
   const { slug } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
 
   try {
     const noticia = await api.getNoticiaPorSlug(slug);
@@ -20,12 +21,25 @@ export async function generateMetadata({ params }: NewsDetailProps) {
     return {
       title: noticia.titulo,
       description: noticia.extracto || noticia.contenido.substring(0, 160).replace(/<[^>]*>/g, ''),
+      alternates: {
+        canonical: `${baseUrl}/noticias/${slug}`,
+      },
       openGraph: {
+        title: noticia.titulo,
+        description: noticia.extracto || '',
+        url: `${baseUrl}/noticias/${slug}`,
+        siteName: "CalidexA",
+        images: imagenPath
+          ? (imagenPath.startsWith('http') ? [imagenPath] : [`${STORAGE_URL}/${imagenPath}`])
+          : [`${baseUrl}/logoCalidexa.png`],
+      },
+      twitter: {
+        card: "summary_large_image",
         title: noticia.titulo,
         description: noticia.extracto || '',
         images: imagenPath
           ? (imagenPath.startsWith('http') ? [imagenPath] : [`${STORAGE_URL}/${imagenPath}`])
-          : [],
+          : [`${baseUrl}/logoCalidexa.png`],
       },
     };
   } catch {

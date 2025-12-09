@@ -12,7 +12,7 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://calidexa.pe';
+const baseUrl = 'https://calidexa.pe';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

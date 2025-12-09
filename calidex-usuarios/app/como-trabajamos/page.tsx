@@ -1,10 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 
-export const metadata = {
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
+
+export const metadata: Metadata = {
   title: "¿Cómo Trabajamos? | CalidexA",
   description:
     "Conoce cómo CalidexA trabaja para generar confianza a través de transparencia, responsabilidad y compromiso con la calidad.",
+  alternates: {
+    canonical: `${baseUrl}/como-trabajamos`,
+  },
+  openGraph: {
+    title: "¿Cómo Trabajamos? | CalidexA",
+    description:
+      "Conoce cómo CalidexA trabaja para generar confianza a través de transparencia, responsabilidad y compromiso con la calidad.",
+    url: `${baseUrl}/como-trabajamos`,
+    siteName: "CalidexA",
+    images: [
+      {
+        url: `${baseUrl}/logoCalidexa.png`,
+        width: 1200,
+        height: 630,
+        alt: "CalidexA - ¿Cómo Trabajamos?",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "¿Cómo Trabajamos? | CalidexA",
+    description:
+      "Conoce cómo CalidexA trabaja para generar confianza a través de transparencia, responsabilidad y compromiso con la calidad.",
+    images: [`${baseUrl}/logoCalidexa.png`],
+  },
 };
 
 export default function ComoTrabajamos() {

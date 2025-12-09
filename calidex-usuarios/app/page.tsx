@@ -4,6 +4,40 @@ import NewsGrid from "./components/news-grid-home";
 import AnimateOnScroll from "./components/animate-on-scroll";
 import { api } from "@/lib/api";
 import { adaptNoticiaToHomeCard, adaptEmpresaToLogo } from "@/lib/adapters";
+import type { Metadata } from "next";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
+
+export const metadata: Metadata = {
+  title: "CalidexA - Certificación de Calidad Empresarial en Perú",
+  description:
+    "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
+  alternates: {
+    canonical: baseUrl,
+  },
+  openGraph: {
+    title: "CalidexA - Certificación de Calidad Empresarial en Perú",
+    description:
+      "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
+    url: baseUrl,
+    siteName: "CalidexA",
+    images: [
+      {
+        url: `${baseUrl}/logoCalidexa.png`,
+        width: 1200,
+        height: 630,
+        alt: "CalidexA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CalidexA - Certificación de Calidad Empresarial",
+    description:
+      "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia.",
+    images: [`${baseUrl}/logoCalidexa.png`],
+  },
+};
 
 export default async function Home() {
   // Fetch últimas 3 noticias
