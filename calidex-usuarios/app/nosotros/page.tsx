@@ -9,8 +9,9 @@ import {
   Target,
   FileCheck,
   Shield,
-  TrendingUp,
   Award,
+  Eye,
+  Heart,
 } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -89,7 +90,7 @@ export default async function Nosotros() {
         </div>
       </section>
 
-      {/* Sección 1: Imagen izquierda, texto derecha - Sistema de confianza */}
+      {/* Sección 1: Quiénes Somos */}
       <section className="bg-gray-100 py-16 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 max-w-6xl mx-auto">
@@ -97,7 +98,7 @@ export default async function Nosotros() {
               <div className="relative w-full h-[400px] lg:h-[500px]">
                 <Image
                   src="/contactoImg.webp"
-                  alt="Sistema de confianza CalidexA"
+                  alt="CalidexA - Quiénes Somos"
                   fill
                   className="rounded-2xl object-cover shadow-lg"
                 />
@@ -106,23 +107,17 @@ export default async function Nosotros() {
 
             <div className="flex-1 w-full">
               <div>
-                <div className="inline-flex items-center gap-2 mb-4">
-                  <CheckCircle2 className="w-6 h-6 text-[var(--color-secondary)]" />
-                  <span className="text-[var(--color-secondary)] font-semibold text-sm uppercase tracking-wide">
-                    Sobre Nosotros
-                  </span>
-                </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6 leading-tight">
-                  Somos un sistema de confianza para el mercado peruano
+                  Quiénes Somos
                 </h2>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
-                  Calidexa nace como una iniciativa independiente que
-                  identifica, reconoce y promueve a las empresas que cumplen con
-                  calidad, transparencia y buenas prácticas.
+                  En Calidexa trabajamos para construir un mercado más confiable, donde las personas y empresas puedan tomar decisiones seguras y bien informadas.
+                </p>
+                <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
+                  Somos un sistema independiente que evalúa, reconoce y destaca a los negocios que cumplen lo que prometen, promoviendo un entorno basado en calidad, responsabilidad y buenas prácticas.
                 </p>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Nuestro propósito es simple: que cualquier persona pueda
-                  elegir con seguridad.
+                  Creemos que elegir un buen servicio no debería ser un riesgo, y por eso analizamos evidencias reales, verificamos información y destacamos únicamente a quienes demuestran compromiso auténtico con sus clientes.
                 </p>
               </div>
             </div>
@@ -130,80 +125,47 @@ export default async function Nosotros() {
         </div>
       </section>
 
-      {/* Sección 2: Texto izquierda, imagen derecha - Mercado honesto */}
+      {/* Sección 2: Misión, Visión y Propósito */}
       <section className="bg-white py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-10 lg:gap-16 max-w-6xl mx-auto">
-            <div className="flex-1 w-full">
-              <div className="relative w-full h-[400px] lg:h-[500px]">
-                <Image
-                  src="/imgBanner.webp"
-                  alt="Mercado honesto y transparente"
-                  fill
-                  className="rounded-2xl object-cover shadow-lg"
-                />
-              </div>
-            </div>
-
-            <div className="flex-1 w-full">
-              <div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              {/* Misión */}
+              <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <TrendingUp className="w-6 h-6 text-[var(--color-secondary)]" />
-                  <span className="text-[var(--color-secondary)] font-semibold text-sm uppercase tracking-wide">
-                    Nuestro Compromiso
-                  </span>
+                  <Target className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
+                  <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                    Nuestra Misión
+                  </h3>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6 leading-tight">
-                  Impulsamos un mercado más honesto y transparente
-                </h2>
-                <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
-                  Creemos que la confianza no debería ser un riesgo.
-                </p>
-                <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Nuestro objetivo es construir una comunidad donde las empresas
-                  cumplan lo que prometen y donde el público pueda tomar
-                  decisiones informadas.
+                <p className="text-[var(--color-text-grey)] leading-relaxed">
+                  Impulsar un mercado más transparente, responsable y seguro, donde las empresas que cumplen sean reconocidas y donde las personas puedan elegir con tranquilidad.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Sección 3: Imagen izquierda, texto derecha - Evaluamos y verificamos */}
-      <section className="bg-gray-100 py-16 lg:py-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 max-w-6xl mx-auto">
-            <div className="flex-1 w-full">
-              <div className="relative w-full h-[400px] lg:h-[500px]">
-                <Image
-                  src="/seguimiento.png"
-                  alt="Evaluación y verificación"
-                  fill
-                  className="rounded-2xl object-cover shadow-lg"
-                />
-              </div>
-            </div>
-
-            <div className="flex-1 w-full">
-              <div>
+              {/* Visión */}
+              <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
                 <div className="inline-flex items-center gap-2 mb-4">
-                  <Star className="w-6 h-6 text-[var(--color-secondary)]" />
-                  <span className="text-[var(--color-secondary)] font-semibold text-sm uppercase tracking-wide">
-                    Nuestro Proceso
-                  </span>
+                  <Eye className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
+                  <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                    Nuestra Visión
+                  </h3>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6 leading-tight">
-                  Evaluamos, verificamos y reconocemos el buen servicio
-                </h2>
-                <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
-                  En Calidexa analizamos buenas prácticas, recopilamos
-                  evidencias, promovemos compromisos de calidad y monitoreamos
-                  que se cumpla lo prometido.
+                <p className="text-[var(--color-text-grey)] leading-relaxed">
+                  Convertirnos en una referencia internacional de confianza, un estándar que certifique calidad real y que transforme la relación entre empresas y consumidores.
                 </p>
-                <p className="text-[var(--color-text-grey)] text-lg leading-relaxed">
-                  Así, garantizamos que cada sello entregado realmente
-                  represente confianza.
+              </div>
+
+              {/* Propósito */}
+              <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <Heart className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
+                  <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                    Nuestro Propósito
+                  </h3>
+                </div>
+                <p className="text-[var(--color-text-grey)] leading-relaxed">
+                  Fomentar una comunidad donde los buenos negocios crecen y donde las personas pueden tomar decisiones informadas, basadas en evidencia y transparencia.
                 </p>
               </div>
             </div>
@@ -255,80 +217,171 @@ export default async function Nosotros() {
         </section>
       )}
 
-      {/* Sección 5: Cards de características */}
+      {/* Sección 3: Qué Hacemos */}
       <section className="bg-gray-100 py-16 lg:py-20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                title: "Verificamos información",
-                description:
-                  "Confirmamos datos reales para garantizar que cada empresa cumple lo que promete.",
-                icon: Shield,
-                color: "text-blue-600",
-                bgColor: "bg-blue-50",
-                borderColor: "border-blue-200",
-              },
-              {
-                title: "Reconocemos el buen servicio",
-                description:
-                  "Destacamos a empresas que brindan una atención honesta y orientada al cliente.",
-                icon: Award,
-                color: "text-yellow-600",
-                bgColor: "bg-yellow-50",
-                borderColor: "border-yellow-200",
-              },
-              {
-                title: "Conectamos a la comunidad",
-                description:
-                  "Unimos a empresas responsables con personas que buscan calidad y tranquilidad al elegir.",
-                icon: Users,
-                color: "text-green-600",
-                bgColor: "bg-green-50",
-                borderColor: "border-green-200",
-              },
-              {
-                title: "Nuestra misión",
-                description:
-                  "Impulsar un mercado más transparente, responsable y confiable en el Perú.",
-                icon: Target,
-                color: "text-purple-600",
-                bgColor: "bg-purple-50",
-                borderColor: "border-purple-200",
-              },
-              {
-                title: "Evaluamos buenas prácticas",
-                description:
-                  "Analizamos criterios clave de servicio, responsabilidad y calidad empresarial.",
-                icon: FileCheck,
-                color: "text-indigo-600",
-                bgColor: "bg-indigo-50",
-                borderColor: "border-indigo-200",
-              },
-            ].map((caracteristica, index) => {
-              const IconComponent = caracteristica.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col border-2 border-transparent hover:border-[var(--color-primary)]/20 group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] min-w-[280px] max-w-[350px]"
-                >
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4">
+                Qué Hacemos
+              </h2>
+            </div>
+            <div className="flex flex-wrap justify-center gap-8">
+              {[
+                  {
+                    title: "Verificamos información",
+                    description:
+                      "Revisamos trabajos reales, evidencias y datos confiables para garantizar que una empresa cumple lo que promete.",
+                    icon: Shield,
+                    color: "text-blue-600",
+                    hoverColor: "group-hover:text-blue-600",
+                    bgColor: "bg-gray-100",
+                    hoverBgColor: "group-hover:bg-blue-50",
+                    borderColor: "border-gray-300",
+                    hoverBorderColor: "group-hover:border-blue-200",
+                  },
+                {
+                  title: "Reconocemos el buen servicio",
+                  description:
+                    "Destacamos a negocios que ofrecen atención responsable, transparente y orientada al cliente.",
+                  icon: Award,
+                  color: "text-yellow-600",
+                  hoverColor: "group-hover:text-yellow-600",
+                  bgColor: "bg-gray-100",
+                  hoverBgColor: "group-hover:bg-yellow-50",
+                  borderColor: "border-gray-300",
+                  hoverBorderColor: "group-hover:border-yellow-200",
+                },
+                {
+                  title: "Evaluamos buenas prácticas",
+                  description:
+                    "Analizamos procesos, responsabilidad, cumplimiento y estándares de servicio.",
+                  icon: FileCheck,
+                  color: "text-indigo-600",
+                  hoverColor: "group-hover:text-indigo-600",
+                  bgColor: "bg-gray-100",
+                  hoverBgColor: "group-hover:bg-indigo-50",
+                  borderColor: "border-gray-300",
+                  hoverBorderColor: "group-hover:border-indigo-200",
+                },
+                {
+                  title: "Conectamos a la comunidad",
+                  description:
+                    "Unimos a personas y negocios que buscan calidad, profesionalismo y tranquilidad en cada decisión.",
+                  icon: Users,
+                  color: "text-green-600",
+                  hoverColor: "group-hover:text-green-600",
+                  bgColor: "bg-gray-100",
+                  hoverBgColor: "group-hover:bg-green-50",
+                  borderColor: "border-gray-300",
+                  hoverBorderColor: "group-hover:border-green-200",
+                },
+              ].map((caracteristica, index) => {
+                const IconComponent = caracteristica.icon;
+                return (
                   <div
-                    className={`w-16 h-16 ${caracteristica.bgColor} ${caracteristica.borderColor} rounded-xl flex items-center justify-center mb-6 mx-auto border-2 group-hover:scale-110 transition-transform duration-300`}
+                    key={index}
+                    className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col border-2 border-transparent hover:border-[var(--color-primary)]/20 group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(50%-1rem)] min-w-[280px] max-w-[400px] cursor-pointer"
                   >
-                    <IconComponent
-                      className={`w-8 h-8 ${caracteristica.color}`}
+                    <div
+                      className={`w-16 h-16 ${caracteristica.bgColor} ${caracteristica.hoverBgColor} rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-all duration-300`}
+                    >
+                      <IconComponent
+                        className={`w-8 h-8 text-gray-500 ${caracteristica.hoverColor} transition-colors duration-300`}
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-500 group-hover:text-[var(--color-primary)] mb-4 text-center transition-colors duration-300">
+                      {caracteristica.title}
+                    </h3>
+                    <p className="text-[var(--color-text-grey)] text-center flex-grow leading-relaxed">
+                      {caracteristica.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección 4: Por Qué Existimos */}
+      <section className="bg-white py-16 lg:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6">
+                Por Qué Existimos
+              </h2>
+            </div>
+            <div className="space-y-4 text-lg text-[var(--color-text-grey)]">
+              <p className="text-center">
+                Porque muchas personas han tenido experiencias negativas al contratar servicios.
+              </p>
+              <p className="text-center">
+                Porque las empresas que sí cumplen merecen ser reconocidas.
+              </p>
+              <p className="text-center font-semibold text-[var(--color-primary)]">
+                Porque la confianza debe ser algo accesible, no una apuesta.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sección 5: Nuestra Promesa */}
+      <section className="bg-gray-100 py-16 lg:py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6">
+                Nuestra Promesa
+              </h2>
+              <p className="text-lg text-[var(--color-text-grey)] mb-8">
+                Cada reconocimiento de Calidexa representa:
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {[
+                { label: "Calidad", icon: Star, color: "text-yellow-600", hoverColor: "group-hover:text-yellow-600" },
+                { label: "Cumplimiento", icon: CheckCircle2, color: "text-green-600", hoverColor: "group-hover:text-green-600" },
+                { label: "Responsabilidad", icon: Shield, color: "text-blue-600", hoverColor: "group-hover:text-blue-600" },
+                { label: "Buen servicio", icon: Award, color: "text-purple-600", hoverColor: "group-hover:text-purple-600" },
+                { label: "Transparencia", icon: Eye, color: "text-indigo-600", hoverColor: "group-hover:text-indigo-600" },
+              ].map((valor, index) => {
+                const IconComponent = valor.icon;
+                return (
+                  <div
+                    key={index}
+                    className="group inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-[var(--color-primary)]/30 cursor-pointer"
+                  >
+                    <IconComponent 
+                      className={`w-5 h-5 text-gray-400 ${valor.hoverColor} transition-colors duration-300`} 
                       strokeWidth={2}
                     />
+                    <span className="font-semibold text-gray-500 group-hover:text-[var(--color-primary)] text-base whitespace-nowrap transition-colors duration-300">
+                      {valor.label}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-bold text-[var(--color-primary)] mb-4 text-center group-hover:text-[var(--color-secondary)] transition-colors">
-                    {caracteristica.title}
-                  </h3>
-                  <p className="text-[var(--color-text-grey)] text-center flex-grow leading-relaxed">
-                    {caracteristica.description}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <div className="text-center space-y-4">
+              <p className="text-lg text-[var(--color-text-grey)] italic">
+                Valoramos la integridad por encima de todo.
+              </p>
+              <p className="text-lg text-[var(--color-text-grey)]">
+                Cada empresa destacada en Calidexa ha demostrado su calidad a través de hechos, no palabras.
+              </p>
+              <div className="pt-6 border-t border-gray-300">
+                <p className="text-xl font-bold text-[var(--color-primary)] mb-2">
+                  Calidexa reconoce mérito, no intereses.
+                </p>
+                <p className="text-lg text-[var(--color-secondary)] font-semibold">
+                  La confianza es nuestro principal compromiso.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
