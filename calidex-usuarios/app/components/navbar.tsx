@@ -175,7 +175,7 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/contacto"
-                  className="block text-[var(--color-secondary)] hover:text-[var(--color-primary)] font-semibold text-base transition-colors duration-300"
+                  className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contacto

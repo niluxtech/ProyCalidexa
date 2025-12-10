@@ -11,7 +11,6 @@ interface CompanyDetailProps {
 
 export async function generateMetadata({ params }: CompanyDetailProps) {
   const { slug } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
 
   try {
     const empresa = await api.getEmpresaPorSlug(slug);
@@ -22,21 +21,10 @@ export async function generateMetadata({ params }: CompanyDetailProps) {
     return {
       title: empresa.nombre,
       description: empresa.descripcion || `Información sobre ${empresa.nombre}`,
-      alternates: {
-        canonical: `${baseUrl}/empresas/${slug}`,
-      },
       openGraph: {
         title: empresa.nombre,
         description: empresa.descripcion || '',
-        url: `${baseUrl}/empresas/${slug}`,
-        siteName: "CalidexA",
-        images: logoPath ? (logoPath.startsWith('http') ? [logoPath] : [`${STORAGE_URL}/${logoPath}`]) : [`${baseUrl}/logoCalidexa.png`],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: empresa.nombre,
-        description: empresa.descripcion || '',
-        images: logoPath ? (logoPath.startsWith('http') ? [logoPath] : [`${STORAGE_URL}/${logoPath}`]) : [`${baseUrl}/logoCalidexa.png`],
+        images: logoPath ? (logoPath.startsWith('http') ? [logoPath] : [`${STORAGE_URL}/${logoPath}`]) : [],
       },
     };
   } catch {
