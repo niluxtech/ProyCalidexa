@@ -107,9 +107,10 @@ export default async function Nosotros() {
 
             <div className="flex-1 w-full">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6 leading-tight">
+                <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4 leading-tight">
                   Quiénes Somos
                 </h2>
+                <div className="w-20 h-1 bg-[var(--color-secondary)] mb-6 rounded-full"></div>
                 <p className="text-[var(--color-text-grey)] text-lg leading-relaxed mb-4">
                   En Calidexa trabajamos para construir un mercado más confiable, donde las personas y empresas puedan tomar decisiones seguras y bien informadas.
                 </p>
@@ -132,12 +133,13 @@ export default async function Nosotros() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {/* Misión */}
               <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
-                <div className="inline-flex items-center gap-2 mb-4">
+                <div className="inline-flex items-center gap-2 mb-2">
                   <Target className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
                   <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
                     Nuestra Misión
                   </h3>
                 </div>
+                <div className="w-16 h-1 bg-gray-300 group-hover:bg-[var(--color-secondary)] mb-4 rounded-full transition-colors duration-300"></div>
                 <p className="text-[var(--color-text-grey)] leading-relaxed">
                   Impulsar un mercado más transparente, responsable y seguro, donde las empresas que cumplen sean reconocidas y donde las personas puedan elegir con tranquilidad.
                 </p>
@@ -145,12 +147,13 @@ export default async function Nosotros() {
 
               {/* Visión */}
               <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
-                <div className="inline-flex items-center gap-2 mb-4">
+                <div className="inline-flex items-center gap-2 mb-2">
                   <Eye className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
                   <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
                     Nuestra Visión
                   </h3>
                 </div>
+                <div className="w-16 h-1 bg-gray-300 group-hover:bg-[var(--color-secondary)] mb-4 rounded-full transition-colors duration-300"></div>
                 <p className="text-[var(--color-text-grey)] leading-relaxed">
                   Convertirnos en una referencia internacional de confianza, un estándar que certifique calidad real y que transforme la relación entre empresas y consumidores.
                 </p>
@@ -158,12 +161,13 @@ export default async function Nosotros() {
 
               {/* Propósito */}
               <div className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg hover:bg-white transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-[var(--color-primary)]/20">
-                <div className="inline-flex items-center gap-2 mb-4">
+                <div className="inline-flex items-center gap-2 mb-2">
                   <Heart className="w-6 h-6 text-gray-400 group-hover:text-[var(--color-secondary)] transition-colors duration-300" />
                   <h3 className="text-xl font-bold text-gray-600 group-hover:text-[var(--color-primary)] transition-colors duration-300">
                     Nuestro Propósito
                   </h3>
                 </div>
+                <div className="w-16 h-1 bg-gray-300 group-hover:bg-[var(--color-secondary)] mb-4 rounded-full transition-colors duration-300"></div>
                 <p className="text-[var(--color-text-grey)] leading-relaxed">
                   Fomentar una comunidad donde los buenos negocios crecen y donde las personas pueden tomar decisiones informadas, basadas en evidencia y transparencia.
                 </p>
@@ -223,78 +227,53 @@ export default async function Nosotros() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4">
-                Qué Hacemos
+                 Nuestro Enfoque
               </h2>
+              <div className="w-20 h-1 bg-[var(--color-secondary)] mx-auto rounded-full"></div>
             </div>
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                  {
-                    title: "Verificamos información",
-                    description:
-                      "Revisamos trabajos reales, evidencias y datos confiables para garantizar que una empresa cumple lo que promete.",
-                    icon: Shield,
-                    color: "text-blue-600",
-                    hoverColor: "group-hover:text-blue-600",
-                    bgColor: "bg-gray-100",
-                    hoverBgColor: "group-hover:bg-blue-50",
-                    borderColor: "border-gray-300",
-                    hoverBorderColor: "group-hover:border-blue-200",
-                  },
+                {
+                  title: "Verificamos información",
+                  description:
+                    "Revisamos trabajos reales, evidencias y datos confiables para garantizar que una empresa cumple lo que promete.",
+                  icon: Shield,
+                },
                 {
                   title: "Reconocemos el buen servicio",
                   description:
                     "Destacamos a negocios que ofrecen atención responsable, transparente y orientada al cliente.",
                   icon: Award,
-                  color: "text-yellow-600",
-                  hoverColor: "group-hover:text-yellow-600",
-                  bgColor: "bg-gray-100",
-                  hoverBgColor: "group-hover:bg-yellow-50",
-                  borderColor: "border-gray-300",
-                  hoverBorderColor: "group-hover:border-yellow-200",
                 },
                 {
                   title: "Evaluamos buenas prácticas",
                   description:
                     "Analizamos procesos, responsabilidad, cumplimiento y estándares de servicio.",
                   icon: FileCheck,
-                  color: "text-indigo-600",
-                  hoverColor: "group-hover:text-indigo-600",
-                  bgColor: "bg-gray-100",
-                  hoverBgColor: "group-hover:bg-indigo-50",
-                  borderColor: "border-gray-300",
-                  hoverBorderColor: "group-hover:border-indigo-200",
                 },
                 {
                   title: "Conectamos a la comunidad",
                   description:
                     "Unimos a personas y negocios que buscan calidad, profesionalismo y tranquilidad en cada decisión.",
                   icon: Users,
-                  color: "text-green-600",
-                  hoverColor: "group-hover:text-green-600",
-                  bgColor: "bg-gray-100",
-                  hoverBgColor: "group-hover:bg-green-50",
-                  borderColor: "border-gray-300",
-                  hoverBorderColor: "group-hover:border-green-200",
                 },
               ].map((caracteristica, index) => {
                 const IconComponent = caracteristica.icon;
                 return (
                   <div
                     key={index}
-                    className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col border-2 border-transparent hover:border-[var(--color-primary)]/20 group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(50%-1rem)] min-w-[280px] max-w-[400px] cursor-pointer"
+                    className="group bg-white rounded-xl p-6 flex flex-col border-2 border-[var(--color-primary)] transition-all duration-300 cursor-pointer hover:scale-105"
                   >
-                    <div
-                      className={`w-16 h-16 ${caracteristica.bgColor} ${caracteristica.hoverBgColor} rounded-lg flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-all duration-300`}
-                    >
+                    <h3 className="text-lg font-bold text-[var(--color-primary)] mb-4 text-center transition-colors duration-300">
+                      {caracteristica.title}
+                    </h3>
+                    <div className="flex justify-center mb-4">
                       <IconComponent
-                        className={`w-8 h-8 text-gray-500 ${caracteristica.hoverColor} transition-colors duration-300`}
+                        className="w-12 h-12 text-[var(--color-primary)] transition-colors duration-300"
                         strokeWidth={1.5}
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-500 group-hover:text-[var(--color-primary)] mb-4 text-center transition-colors duration-300">
-                      {caracteristica.title}
-                    </h3>
-                    <p className="text-[var(--color-text-grey)] text-center flex-grow leading-relaxed">
+                    <p className="text-[var(--color-primary)] text-sm text-center leading-relaxed flex-grow">
                       {caracteristica.description}
                     </p>
                   </div>
@@ -306,7 +285,7 @@ export default async function Nosotros() {
       </section>
 
       {/* Sección 4: Por Qué Existimos */}
-      <section className="bg-white py-16 lg:py-20">
+      {/* <section className="bg-white py-16 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
@@ -327,27 +306,29 @@ export default async function Nosotros() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Sección 5: Nuestra Promesa */}
-      <section className="bg-gray-100 py-16 lg:py-20">
+      <section className="bg-white py-16 lg:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-6">
                 Nuestra Promesa
+                <div className="w-20 h-1 bg-[var(--color-secondary)] mx-auto rounded-full mt-2"></div>
               </h2>
+
               <p className="text-lg text-[var(--color-text-grey)] mb-8">
                 Cada reconocimiento de Calidexa representa:
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               {[
-                { label: "Calidad", icon: Star, color: "text-yellow-600", hoverColor: "group-hover:text-yellow-600" },
                 { label: "Cumplimiento", icon: CheckCircle2, color: "text-green-600", hoverColor: "group-hover:text-green-600" },
                 { label: "Responsabilidad", icon: Shield, color: "text-blue-600", hoverColor: "group-hover:text-blue-600" },
                 { label: "Buen servicio", icon: Award, color: "text-purple-600", hoverColor: "group-hover:text-purple-600" },
                 { label: "Transparencia", icon: Eye, color: "text-indigo-600", hoverColor: "group-hover:text-indigo-600" },
+                { label: "Calidad", icon: Star, color: "text-yellow-600", hoverColor: "group-hover:text-yellow-600" },
               ].map((valor, index) => {
                 const IconComponent = valor.icon;
                 return (

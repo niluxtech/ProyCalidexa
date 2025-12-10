@@ -1,133 +1,49 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import CompanyGrid from "@/app/components/company-grid";
-import AnimateOnScroll from "@/app/components/animate-on-scroll";
-import { api } from "@/lib/api";
-import { adaptEmpresaToCard } from "@/lib/adapters";
+import Link from "next/link";
 
 export default function Companies() {
-  const [empresas, setEmpresas] = useState<any[]>([]);
-  const [todasEmpresas, setTodasEmpresas] = useState<any[]>([]);
-  const [search, setSearch] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Cargar todas las empresas inicialmente
-  useEffect(() => {
-    const fetchTodasEmpresas = async () => {
-      setIsLoading(true);
-      try {
-        const response = await api.getEmpresas();
-        // Manejar tanto array directo como respuesta paginada
-        const empresasArray = Array.isArray(response) 
-          ? response 
-          : (response as any)?.data || [];
-        const adaptadas = empresasArray.map(adaptEmpresaToCard);
-        setTodasEmpresas(adaptadas);
-        setEmpresas(adaptadas);
-      } catch (error) {
-        console.error("Error al cargar empresas:", error);
-        setEmpresas([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchTodasEmpresas();
-  }, []);
-
-  // Filtrar empresas por búsqueda (nombre y descripción)
-  useEffect(() => {
-    if (!search) {
-      setEmpresas(todasEmpresas);
-      return;
-    }
-
-    const searchLower = search.toLowerCase();
-    const filtered = todasEmpresas.filter((empresa) =>
-      empresa.name.toLowerCase().includes(searchLower) ||
-      empresa.description.toLowerCase().includes(searchLower)
-    );
-    setEmpresas(filtered);
-  }, [search, todasEmpresas]);
-
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="py-16 lg:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <AnimateOnScroll animation="fadeInUp" threshold={0.2}>
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h1 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-4">
-                Empresas certificadas por CalidexA
-              </h1>
-              <p className="text-[var(--color-text-grey)]">
-                Encuentre empresas confiables y certificadas que cumplen con
-                nuestros rigurosos estándares de calidad.
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] mb-8 leading-tight">
+              Estamos construyendo una comunidad única.
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-[var(--color-text-grey)] leading-relaxed mb-12 max-w-3xl mx-auto">
+              Pronto podrás conocer a las primeras empresas que creen en la transparencia, el compromiso y el respeto por sus clientes. Gracias por ser parte de este inicio: juntos daremos visibilidad a negocios que cumplen con lo que prometen y ofrecen tranquilidad a quienes los eligen.
+            </p>
+
+            <div className="bg-gray-50 rounded-2xl p-8 lg:p-12 mb-8">
+              <h2 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-6">
+                ¿Quieres que tu empresa aparezca aquí cuando lancemos la lista?
+              </h2>
+              
+              <p className="text-lg text-[var(--color-text-grey)] mb-6">
+                Si tu empresa comparte estos valores, queremos conocerte.
               </p>
-            </div>
-          </AnimateOnScroll>
-          <AnimateOnScroll animation="fadeInUp" delay="delay-1s" threshold={0.2}>
-            {/* Búsqueda */}
-            <div className="mt-10">
-              <div className="relative w-full sm:w-64 mx-auto">
-                <input
-                  type="text"
-                  placeholder="Buscar empresa..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-                />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              {search && (
-                <button
-                  onClick={() => setSearch("")}
-                  className="mt-4 flex items-center gap-2 mx-auto bg-gray-300 text-[var(--color-primary)] font-medium px-4 py-2 rounded-full hover:bg-gray-400 transition"
+              
+              <div className="bg-white rounded-xl p-6 border-2 border-[var(--color-primary)]/20">
+                <p className="text-base text-[var(--color-text-grey)] mb-2">
+                  Envíanos un correo a
+                </p>
+                <a 
+                  href="mailto:Contacto@calidexa.pe?subject=Unirme a CalidexA"
+                  className="text-xl font-bold text-[var(--color-primary)] hover:text-[var(--color-secondary)] transition-colors inline-block mb-2"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4 4v5h.582m15.356 2A8 8 0 004.582 9M4 20v-5h.582m15.356-2a8 8 0 01-15.356 2"
-                    />
-                  </svg>
-                  Limpiar búsqueda
-                </button>
-              )}
+                  Contacto@calidexa.pe
+                </a>
+                <p className="text-base text-[var(--color-text-grey)] mt-4">
+                  con el asunto: <span className="font-semibold text-[var(--color-primary)]">"Unirme a CalidexA"</span>.
+                </p>
+              </div>
             </div>
-            {/* Grid de empresas */}
-            <div className="mt-10">
-              {isLoading ? (
-                <p className="text-gray-500">Cargando empresas...</p>
-              ) : empresas.length === 0 ? (
-                <p className="text-gray-500">No se encontraron empresas</p>
-              ) : (
-                <CompanyGrid companies={empresas} columns={3} />
-              )}
+
+            <div className="inline-flex items-center gap-2 text-[var(--color-secondary)] font-semibold text-lg">
+              <span>Próximamente</span>
             </div>
-          </AnimateOnScroll>
           </div>
+        </div>
       </section>
     </main>
   );

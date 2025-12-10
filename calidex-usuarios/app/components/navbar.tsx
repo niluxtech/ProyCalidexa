@@ -42,7 +42,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="https://mensaje.calidexa.pe/"
+                href="/empresas"
                 className={`text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-sm lg:text-base transition-colors duration-300 ${
                   isActive("/empresas") ? "text-[var(--color-secondary)]" : ""
                 }`}
@@ -138,7 +138,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="https://mensaje.calidexa.pe/"
+                  href="/empresas"
                   className="block text-[var(--color-text)] hover:text-[var(--color-secondary)] font-medium text-base transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >

@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="https://mensaje.calidexa.pe/" 
+                  href="/empresas" 
                   className="text-sm text-[var(--color-text)] hover:text-[var(--color-secondary)] transition-colors"
                 >
                   Empresas
