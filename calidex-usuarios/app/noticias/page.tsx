@@ -87,7 +87,7 @@ export default function News() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Columna izquierda: Grid de noticias */}
-            <AnimateOnScroll animation="fadeInRight" threshold={0.2} className="lg:col-span-2">
+            <AnimateOnScroll animation="fadeInRight" threshold={0.2} className="lg:col-span-2 order-2 lg:order-1">
               {isLoading ? (
                 <p className="text-gray-500">Cargando noticias...</p>
               ) : noticias.length === 0 ? (
@@ -98,7 +98,7 @@ export default function News() {
             </AnimateOnScroll>
 
             {/* Columna derecha: Sidebar */}
-            <AnimateOnScroll animation="fadeInLeft" threshold={0.2}>
+            <AnimateOnScroll animation="fadeInLeft" threshold={0.2} className="order-1 lg:order-2">
               <aside className="space-y-8">
               {/* Buscador */}
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
