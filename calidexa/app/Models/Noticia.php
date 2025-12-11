@@ -17,11 +17,15 @@ class Noticia extends Model
         'contenido',
         'imagen_url',
         'video_url',
-        'publicado_at'
+        'publicado_at',
+        'destacada',
+        'mostrar_video'
     ];
 
     protected $casts = [
         'publicado_at' => 'datetime',
+        'destacada' => 'boolean',
+        'mostrar_video' => 'boolean',
     ];
 
     // NUEVO: Agrega extracto e imagen al JSON, pero también mantenemos imagen_url para compatibilidad
@@ -52,6 +56,13 @@ class Noticia extends Model
     public function scopePorCategoria($query, $categoria)
     {
         return $query->where('categoria', $categoria);
+    }
+
+    public function scopeDestacadas($query)
+    {
+        return $query->where('destacada', true)
+                    ->orderBy('publicado_at', 'desc')
+                    ->limit(3);
     }
 
     protected static function boot()

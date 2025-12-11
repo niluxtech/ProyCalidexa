@@ -8,6 +8,8 @@ export interface CreateNoticiaData {
   imagen?: File;
   video_url?: string;
   publicado_at?: string;
+  destacada?: boolean;
+  mostrar_video?: boolean;
 }
 
 export const noticiasService = {
@@ -29,7 +31,12 @@ export const noticiasService = {
     
     Object.entries(noticiaData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        formData.append(key, value);
+        // Convertir booleanos a "1" o "0" para que Laravel los reconozca correctamente
+        if (typeof value === 'boolean') {
+          formData.append(key, value ? '1' : '0');
+        } else {
+          formData.append(key, value);
+        }
       }
     });
 
@@ -54,7 +61,12 @@ export const noticiasService = {
     
     Object.entries(noticiaData).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
-        formData.append(key, value);
+        // Convertir booleanos a "1" o "0" para que Laravel los reconozca correctamente
+        if (typeof value === 'boolean') {
+          formData.append(key, value ? '1' : '0');
+        } else {
+          formData.append(key, value);
+        }
       }
     });
 

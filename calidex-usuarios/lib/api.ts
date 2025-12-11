@@ -50,6 +50,8 @@ export interface Noticia {
   imagen_url: string | null;
   video_url: string | null;
   publicado_at: string | null;
+  destacada: boolean;
+  mostrar_video: boolean;
   extracto?: string;
   created_at: string;
   updated_at: string;
@@ -88,6 +90,9 @@ export const api = {
   // --- Noticias ---
   getNoticias: () =>
     apiFetch<PaginatedResponse<Noticia>>('/public/noticias?per_page=12'),
+
+  getNoticiasDestacadas: () =>
+    apiFetch<{ data: Noticia[] }>('/public/noticias/destacadas'),
 
   getNoticiaPorSlug: (slug: string) =>
     apiFetch<Noticia>(`/public/noticias/${slug}`),

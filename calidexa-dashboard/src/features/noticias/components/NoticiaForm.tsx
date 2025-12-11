@@ -12,6 +12,8 @@ const noticiaSchema = z.object({
   video_url: z.string().url('URL inválida').optional().or(z.literal('')),
   publicado_at: z.string().optional(),
   imagen: z.any().optional(),
+  destacada: z.boolean().optional(),
+  mostrar_video: z.boolean().optional(),
 });
 
 type NoticiaFormData = z.infer<typeof noticiaSchema>;
@@ -30,6 +32,8 @@ export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading, defaultVal
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<NoticiaFormData>({
     resolver: zodResolver(noticiaSchema),
@@ -42,10 +46,14 @@ export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading, defaultVal
           publicado_at: noticia.publicado_at
             ? new Date(noticia.publicado_at).toISOString().slice(0, 16)
             : '',
+          destacada: noticia.destacada || false,
+          mostrar_video: noticia.mostrar_video || false,
         }
       : {
           categoria: 'General',
           publicado_at: new Date().toISOString().slice(0, 16),
+          destacada: false,
+          mostrar_video: false,
         }),
   });
 
@@ -123,6 +131,45 @@ export const NoticiaForm = ({ noticia, onSubmit, onCancel, isLoading, defaultVal
         <p className="mt-1 text-xs text-gray-500">JPG, PNG (máx. 5MB)</p>
         {errors.imagen && (
           <p className="mt-1 text-xs text-red-600">{errors.imagen.message as string}</p>
+        )}
+      </div>
+
+      {/* Checkboxes para destacar y mostrar video */}
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center">
+          <input
+            {...register('destacada', {
+              setValueAs: (value) => value === true || value === 'on' || value === 'true',
+              onChange: (e) => {
+                // Si se desmarca destacada, también desmarcar mostrar_video
+                if (!e.target.checked) {
+                  setValue('mostrar_video', false);
+                }
+              },
+            })}
+            type="checkbox"
+            id="destacada"
+            className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+          />
+          <label htmlFor="destacada" className="ml-2 block text-sm font-medium text-gray-700">
+            Destacar en "Últimas noticias" (máximo 3)
+          </label>
+        </div>
+        
+        {watch('destacada') && watch('video_url') && (
+          <div className="flex items-center">
+            <input
+              {...register('mostrar_video', {
+                setValueAs: (value) => value === true || value === 'on' || value === 'true',
+              })}
+              type="checkbox"
+              id="mostrar_video"
+              className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            />
+            <label htmlFor="mostrar_video" className="ml-2 block text-sm font-medium text-gray-700">
+              Mostrar video en lugar de imagen (si tiene URL de video)
+            </label>
+          </div>
         )}
       </div>
 

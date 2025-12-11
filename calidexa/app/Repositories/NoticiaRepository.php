@@ -17,6 +17,16 @@ class NoticiaRepository
         return Noticia::publicadas()->paginate($perPage);
     }
 
+    public function destacadas()
+    {
+        return Noticia::destacadas()->get();
+    }
+
+    public function countDestacadas()
+    {
+        return Noticia::where('destacada', true)->count();
+    }
+
     public function porCategoria($categoria, $perPage = 12)
     {
         return Noticia::publicadas()

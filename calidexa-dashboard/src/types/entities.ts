@@ -34,6 +34,8 @@ export interface Noticia {
   imagen: string | null;
   video_url: string | null;
   publicado_at: string | null;
+  destacada: boolean;
+  mostrar_video: boolean;
   extracto?: string;
   created_at: string;
   updated_at: string;

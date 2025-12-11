@@ -69,6 +69,7 @@ export function adaptNoticiaToHomeCard(noticia: Noticia & { imagen?: string | nu
     category: noticia.categoria,
     author: 'CalidexA',
     image: buildImageUrl(imagenPath),
+    videoUrl: noticia.mostrar_video && noticia.video_url ? noticia.video_url : null,
     slug: noticia.slug,
   };
 }

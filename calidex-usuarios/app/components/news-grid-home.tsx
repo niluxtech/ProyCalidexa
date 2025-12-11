@@ -8,6 +8,7 @@ interface News {
   category: string;
   author: string;
   image: string;
+  videoUrl?: string | null;
   slug: string;
 }
 
@@ -34,6 +35,7 @@ export default function NewsGrid({ news, columns = 3 }: NewsGridProps) {
           category={item.category}
           author={item.author}
           image={item.image}
+          videoUrl={item.videoUrl}
           slug={item.slug}
         />
       ))}

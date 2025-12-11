@@ -13,6 +13,7 @@ Route::prefix('public')->group(function () {
     
     // Noticias públicas
     Route::get('/noticias', [NoticiaController::class, 'publicadas']);
+    Route::get('/noticias/destacadas', [NoticiaController::class, 'destacadas']);
     Route::get('/noticias/categoria/{categoria}', [NoticiaController::class, 'porCategoria']);
     Route::get('/noticias/{slug}', [NoticiaController::class, 'showBySlug']);
     Route::get('/categorias', [NoticiaController::class, 'categorias']);

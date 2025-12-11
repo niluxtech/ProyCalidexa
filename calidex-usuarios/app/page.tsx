@@ -40,13 +40,20 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Fetch últimas 3 noticias
+  // Fetch noticias destacadas (máximo 3)
   let ultimasNoticias: any[] = [];
   try {
-    const { data: noticias } = await api.getNoticias();
-    ultimasNoticias = noticias.slice(0, 3).map(adaptNoticiaToHomeCard);
+    const { data: noticiasDestacadas } = await api.getNoticiasDestacadas();
+    ultimasNoticias = noticiasDestacadas.slice(0, 3).map(adaptNoticiaToHomeCard);
   } catch (error) {
-    console.error("Error al cargar noticias:", error);
+    console.error("Error al cargar noticias destacadas:", error);
+    // Fallback: si no hay destacadas, usar las últimas 3 publicadas
+    try {
+      const { data: noticias } = await api.getNoticias();
+      ultimasNoticias = noticias.slice(0, 3).map(adaptNoticiaToHomeCard);
+    } catch (fallbackError) {
+      console.error("Error al cargar noticias de respaldo:", fallbackError);
+    }
   }
 
   // Fetch empresas activas para el carrusel de logos
@@ -147,7 +154,7 @@ export default async function Home() {
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl lg:text-3xl font-bold text-[var(--color-primary)] mb-8">
-              Últimas noticias
+              Publicaciones destacadas
             </h2>
 
             {ultimasNoticias.length > 0 ? (

@@ -64,6 +64,12 @@ class NoticiaController extends Controller
         return response()->json($noticias);
     }
 
+    public function destacadas()
+    {
+        $noticias = $this->noticiaService->listarDestacadas();
+        return response()->json(['data' => $noticias]);
+    }
+
     public function porCategoria(Request $request, $categoria)
     {
         $noticias = $this->noticiaService->listarPorCategoria(

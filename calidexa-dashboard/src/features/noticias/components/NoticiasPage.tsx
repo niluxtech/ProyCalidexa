@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Plus, Newspaper } from 'lucide-react';
+import { toast } from 'sonner';
 import {
   useNoticias,
   useCreateNoticia,
@@ -49,18 +50,40 @@ export const NoticiasPage = () => {
     }
   };
 
-  const onSubmit = (data: any) => {
-    const formData: any = { ...data };
+  const onSubmit = (formData: any) => {
+    // Validar máximo 3 noticias destacadas
+    if (formData.destacada) {
+      const destacadasActuales = data?.data?.filter((n: Noticia) => n.destacada && n.id !== selectedNoticia?.id).length || 0;
+      const isUpdatingExisting = selectedNoticia && selectedNoticia.destacada;
+      
+      // Si está marcando una nueva como destacada y ya hay 3, rechazar
+      if (!isUpdatingExisting && destacadasActuales >= 3) {
+        toast.error('Ya existen 3 noticias destacadas. Debe desmarcar una antes de destacar otra.');
+        return;
+      }
+    }
 
-    if (data.imagen && data.imagen[0]) {
-      formData.imagen = data.imagen[0];
+    const submitData: any = { ...formData };
+
+    // Asegurar que destacada y mostrar_video sean booleanos
+    submitData.destacada = Boolean(formData.destacada);
+    
+    // Si no está destacada, mostrar_video debe ser false
+    if (!submitData.destacada) {
+      submitData.mostrar_video = false;
     } else {
-      delete formData.imagen;
+      submitData.mostrar_video = Boolean(formData.mostrar_video);
+    }
+
+    if (formData.imagen && formData.imagen[0]) {
+      submitData.imagen = formData.imagen[0];
+    } else {
+      delete submitData.imagen;
     }
 
     if (selectedNoticia) {
       updateMutation.mutate(
-        { id: selectedNoticia.id, data: formData },
+        { id: selectedNoticia.id, data: submitData },
         {
           onSuccess: () => {
             setIsModalOpen(false);
@@ -69,7 +92,7 @@ export const NoticiasPage = () => {
         }
       );
     } else {
-      createMutation.mutate(formData, {
+      createMutation.mutate(submitData, {
         onSuccess: () => {
           setIsModalOpen(false);
         },

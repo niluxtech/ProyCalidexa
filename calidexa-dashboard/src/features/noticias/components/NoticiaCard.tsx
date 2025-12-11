@@ -1,4 +1,4 @@
-import { Calendar, Edit, Trash2, Newspaper } from 'lucide-react';
+import { Calendar, Edit, Trash2, Newspaper, Star } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Button } from '../../../components/ui';
@@ -28,10 +28,18 @@ export const NoticiaCard = ({ noticia, onEdit, onDelete }: NoticiaCardProps) => 
 
       {/* Content */}
       <div className="p-4">
-        {/* Badge Categoría */}
-        <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-primary-100 text-primary-700 mb-2">
-          {noticia.categoria}
-        </span>
+        {/* Badge Categoría y Destacada */}
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-primary-100 text-primary-700">
+            {noticia.categoria}
+          </span>
+          {noticia.destacada && (
+            <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+              <Star className="h-3 w-3 fill-yellow-600" />
+              Destacada
+            </span>
+          )}
+        </div>
 
         {/* Título */}
         <h3 className="font-semibold text-gray-900 line-clamp-2 mb-2">

@@ -24,6 +24,11 @@ class NoticiaService
         return $this->noticiaRepository->publicadas($perPage);
     }
 
+    public function listarDestacadas()
+    {
+        return $this->noticiaRepository->destacadas();
+    }
+
     public function listarPorCategoria($categoria, $perPage = 12)
     {
         return $this->noticiaRepository->porCategoria($categoria, $perPage);
@@ -41,6 +46,11 @@ class NoticiaService
 
     public function crear(array $data)
     {
+        // Validar máximo 3 noticias destacadas
+        if (isset($data['destacada']) && $data['destacada']) {
+            $this->validarMaximoDestacadas();
+        }
+
         // Manejar imagen si existe
         if (isset($data['imagen']) && $data['imagen']) {
             $data['imagen_url'] = $this->guardarImagen($data['imagen']);
@@ -58,6 +68,11 @@ class NoticiaService
     public function actualizar($id, array $data)
     {
         $noticia = $this->noticiaRepository->find($id);
+
+        // Validar máximo 3 noticias destacadas (solo si se está marcando como destacada y no lo estaba antes)
+        if (isset($data['destacada']) && $data['destacada'] && !$noticia->destacada) {
+            $this->validarMaximoDestacadas();
+        }
 
         // Manejar nueva imagen
         if (isset($data['imagen']) && $data['imagen']) {
@@ -104,6 +119,14 @@ class NoticiaService
     {
         if (Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
+        }
+    }
+
+    private function validarMaximoDestacadas()
+    {
+        $destacadasCount = $this->noticiaRepository->countDestacadas();
+        if ($destacadasCount >= 3) {
+            throw new \Exception('Ya existen 3 noticias destacadas. Debe desmarcar una antes de destacar otra.');
         }
     }
 }
