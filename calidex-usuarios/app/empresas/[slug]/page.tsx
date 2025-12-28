@@ -68,10 +68,10 @@ export default async function CompanyDetail({ params }: CompanyDetailProps) {
     "name": empresa.nombre,
     "url": `https://calidexa.pe/empresas/${empresa.slug}`,
     "logo": logoUrl,
-    "description": empresa.descripcion || `Empresa certificada por CalidexA: ${empresa.nombre}`,
+    "description": empresa.descripcion || `Empresa recomendada por CalidexA: ${empresa.nombre}`,
     "identifier": empresa.codigo,
     "areaServed": "PE",
-    "award": `Certificación CalidexA - ${empresa.nivel}`,
+    "award": `Recomendación de CalidexA - ${empresa.nivel}`,
   };
 
   return (

@@ -413,7 +413,7 @@ export default function ComoTrabajamos() {
                 href="/contacto"
                 className="inline-block bg-[var(--color-secondary)] text-[var(--color-primary)] font-medium px-8 py-3 rounded-full hover:opacity-90 transition-all"
               >
-                Certificar mi empresa
+                Recomendar mi empresa
               </Link>
             </div>
           </div>

@@ -17,11 +17,11 @@ const baseUrl = 'https://calidexa.pe';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "CalidexA - Certificación de Calidad Empresarial en Perú",
+    default: "CalidexA – Comunidad de empresas que cumplen lo que prometen",
     template: "%s | CalidexA"
   },
-  description: "Plataforma que certifica empresas comprometidas con la calidad, transparencia y cumplimiento en Perú",
-  keywords: ["certificación", "calidad", "empresas", "Perú", "acreditación", "confianza"],
+  description: "Plataforma que recomienda empresas comprometidas con la calidad, transparencia y cumplimiento en Perú",
+  keywords: ["recomienda", "calidad", "empresas", "Perú", "acreditación", "confianza"],
   authors: [{ name: "CalidexA" }],
   creator: "CalidexA",
   publisher: "CalidexA",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: "es_PE",
     url: baseUrl,
     siteName: "CalidexA",
-    title: "CalidexA - Certificación de Calidad Empresarial",
+    title: "CalidexA - Recomendando Calidad Empresarial",
     description: "Acreditamos empresas que cumplen lo que prometen",
     images: [
       {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "CalidexA",
-    description: "Certificación de Calidad Empresarial en Perú",
+    description: "Recomendando Calidad Empresarial en Perú",
     images: [`${baseUrl}/logoCalidexa.png`],
   },
   robots: {

@@ -9,16 +9,16 @@ import type { Metadata } from "next";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://calidexa.pe";
 
 export const metadata: Metadata = {
-  title: "CalidexA - Certificación de Calidad Empresarial en Perú",
+  title: "CalidexA - Recomendando Calidad Empresarial en Perú",
   description:
-    "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
+    "CalidexA recomienda empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
   alternates: {
     canonical: baseUrl,
   },
   openGraph: {
-    title: "CalidexA - Certificación de Calidad Empresarial en Perú",
+    title: "CalidexA - Recomendando Calidad Empresarial en Perú",
     description:
-      "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
+      "CalidexA recomienda empresas que garantizan calidad, cumplimiento y transparencia en cada servicio o producto.",
     url: baseUrl,
     siteName: "CalidexA",
     images: [
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CalidexA - Certificación de Calidad Empresarial",
+    title: "CalidexA - Recomendando Calidad Empresarial",
     description:
-      "CalidexA certifica empresas que garantizan calidad, cumplimiento y transparencia.",
+      "CalidexA recomienda empresas que garantizan calidad, cumplimiento y transparencia.",
     images: [`${baseUrl}/logoCalidexa.png`],
   },
 };
@@ -84,7 +84,7 @@ export default async function Home() {
                 Acreditamos negocios que cumplen lo que prometen
               </h1>
               <p className="text-base sm:text-lg text-[var(--color-text-grey)] mb-8 max-w-xl mx-auto lg:mx-0 animate__animated animate__fadeInUp animate__delay-1s">
-                CalidexA certifica empresas que garantizan calidad, cumplimiento
+                CalidexA recomienda empresas que garantizan calidad, cumplimiento
                 y transparencia en cada servicio o producto.
               </p>
               <Link
